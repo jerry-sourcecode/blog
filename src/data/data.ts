@@ -1,8 +1,11 @@
-import { defineStore } from 'pinia'
-import { ref } from "vue";
-import { File, Folder, type Item } from "./model.ts";
+import { defineStore } from 'pinia';
+import { ref } from 'vue';
+import { File, Folder, type Item } from './model.ts';
 
 export const useFileSystemStore = defineStore('FileSystem', () => {
+    const isPreview = ref(false);
+    const text = ref('');
+
     const root = ref<Folder>(new Folder(':', null));
 
     function fromString(path: string): Item | null {
@@ -17,8 +20,8 @@ export const useFileSystemStore = defineStore('FileSystem', () => {
                 if (i == len - 1 && findFile && sub instanceof Folder) continue;
                 if (i == len - 1 && !findFile && sub instanceof File) continue;
                 if (sub.name === part) {
-                    if (sub instanceof File){
-                        if (!findFile || i != len - 1){
+                    if (sub instanceof File) {
+                        if (!findFile || i != len - 1) {
                             continue;
                         } else {
                             return sub;
@@ -29,7 +32,8 @@ export const useFileSystemStore = defineStore('FileSystem', () => {
                     break;
                 }
             }
-            if (!found) { // If not found, create a new one
+            if (!found) {
+                // If not found, create a new one
                 return null;
             }
         }
@@ -38,6 +42,8 @@ export const useFileSystemStore = defineStore('FileSystem', () => {
 
     return {
         root,
-        fromString
-    }
-})
+        fromString,
+        isPreview,
+        text,
+    };
+});
