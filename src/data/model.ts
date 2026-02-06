@@ -48,6 +48,9 @@ class Folder {
         }
         return this.pos!.toString() + this.name + '/';
     }
+    filename(): string {
+        return this.name;
+    }
 }
 
 class File {
@@ -60,17 +63,26 @@ class File {
     toString(): string {
         return this.pos.toString() + this.name;
     }
+    filename(): string {
+        return this.name;
+    }
 }
 
-class Document extends File
-{
+class Document extends File {
     writer: string;
     title: string;
     content: string;
     creationTime: Date;
     lastModifiedTime: Date;
     id: string;
-    constructor(name: string, pos: Folder, writer: string, title: string, content: string, id: string){
+    constructor(
+        name: string,
+        pos: Folder,
+        writer: string,
+        title: string,
+        content: string,
+        id: string,
+    ) {
         super(name, pos);
         this.writer = writer;
         this.title = title;
@@ -78,6 +90,12 @@ class Document extends File
         this.id = id;
         this.creationTime = new Date();
         this.lastModifiedTime = new Date();
+    }
+    toString(): string {
+        return super.toString() + '.doc';
+    }
+    filename(): string {
+        return super.filename() + '.doc';
     }
 }
 

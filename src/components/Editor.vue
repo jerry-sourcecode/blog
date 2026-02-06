@@ -1,30 +1,32 @@
 <template>
     <div
-        class="editor-container"
         v-if="dataStore.isPreview"
         :style="`height: ${editorHeight}`"
+        class="editor-container"
     >
         <!-- 完整的编辑器 -->
         <VMdPreview
-            :text="dataStore.text"
             :height="editorHeight"
+            :text="text"
             class="markdown-editor"
         ></VMdPreview>
     </div>
-    <div class="editor-container" v-else>
+    <div v-else class="editor-container">
         <VMdEditor
-            v-model="dataStore.text"
-            class="markdown-editor"
+            v-model="text"
             :height="editorHeight"
+            class="markdown-editor"
         ></VMdEditor>
     </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import { ref, onMounted, onUnmounted } from 'vue';
 import VMdEditor from '@kangc/v-md-editor';
 import VMdPreview from '@kangc/v-md-editor/lib/preview';
 import { useFileSystemStore } from '../data/data.ts';
+
+const text = defineModel<string>();
 
 const dataStore = useFileSystemStore();
 
@@ -40,8 +42,8 @@ const calculateHeight = () => {
         const appTop = appRect.top;
 
         // 计算可用高度：窗口高度减去app元素顶部位置
-        const availableHeight = windowHeight - appTop - 32 - 24 - 110; // 减去一些边距
-        editorHeight.value = `${Math.max(300, availableHeight)}px`; // 最小高度300px
+        const availableHeight = windowHeight - appTop - 32 - 24 - 165; // 减去一些边距
+        editorHeight.value = `${availableHeight}px`;
     }
 };
 
@@ -57,7 +59,7 @@ onUnmounted(() => {
 
 <style>
 .editor-container {
-    height: 100%;
+    height: 90%;
     display: flex;
     flex-direction: column;
 }
