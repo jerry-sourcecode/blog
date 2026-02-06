@@ -2,14 +2,11 @@
 import {
     NLayout,
     NLayoutSider,
-    NLayoutContent,
     NPageHeader,
     NSpace,
     NButton,
     NTabs,
     NTab,
-    NTabPane,
-    NEmpty,
 } from 'naive-ui';
 import Menu from './components/Menu.vue';
 import Editor from './components/Editor.vue';
@@ -18,10 +15,6 @@ import { Document } from './data/model.ts';
 import { ref } from 'vue';
 
 const dataStore = useFileSystemStore();
-
-function changeMode() {
-    dataStore.isPreview = !dataStore.isPreview;
-}
 
 const FA = dataStore.root.subDir('A');
 const FB = dataStore.root.subDir('B');
@@ -53,11 +46,6 @@ function onPartitionTabChange(name: number) {
             <template #extra>
                 <n-space>
                     <n-button>设置</n-button>
-                    <n-button @click="changeMode"
-                        >切换至{{
-                            dataStore.isPreview ? '编辑' : '预览'
-                        }}</n-button
-                    >
                 </n-space>
             </template>
         </n-page-header>

@@ -3,7 +3,6 @@ import { type Ref, ref } from 'vue';
 import { Document, File, Folder, type Item } from './model.ts';
 
 export const useFileSystemStore = defineStore('FileSystem', () => {
-    const isPreview = ref(false);
     const text: Ref<Document[]> = ref([]);
 
     const root = ref<Folder>(new Folder(':', null));
@@ -44,7 +43,6 @@ export const useFileSystemStore = defineStore('FileSystem', () => {
     return {
         root,
         fromString,
-        isPreview,
         text,
         currentPartition,
     };

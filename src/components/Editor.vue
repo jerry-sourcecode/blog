@@ -8,28 +8,18 @@
     >
         <n-tab-pane
             v-for="(txt, idx) in dataStore.text"
-            :key="idx"
             :name="idx"
             :tab="txt.name"
         >
-            <div
-                v-if="dataStore.isPreview"
-                :style="`height: ${editorHeight}`"
-                class="editor-container"
-            >
+            <div :style="`height: ${editorHeight}`" class="editor-container">
                 <!-- 完整的编辑器 -->
-                <VMdPreview
-                    :height="editorHeight"
-                    :text="dataStore.text[idx]!.content"
-                    class="markdown-editor"
-                ></VMdPreview>
-            </div>
-            <div v-else class="editor-container">
-                <VMdEditor
+                <MdEditor
                     v-model="dataStore.text[idx]!.content"
-                    :height="editorHeight"
+                    :codeFoldable="false"
+                    :toolbarsExclude="[`github`, `htmlPreview`]"
                     class="markdown-editor"
-                ></VMdEditor>
+                    previewTheme="github"
+                ></MdEditor>
             </div>
         </n-tab-pane>
     </n-tabs>
@@ -38,8 +28,8 @@
 
 <script lang="ts" setup>
 import { ref, onMounted, onUnmounted } from 'vue';
-import VMdEditor from '@kangc/v-md-editor';
-import VMdPreview from '@kangc/v-md-editor/lib/preview';
+import { MdEditor } from 'md-editor-v3';
+import 'md-editor-v3/lib/style.css';
 import { useFileSystemStore } from '../data/data.ts';
 import { NEmpty, NTabPane, NTabs } from 'naive-ui';
 
