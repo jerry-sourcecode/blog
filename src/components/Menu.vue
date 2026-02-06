@@ -6,7 +6,7 @@
 
 <script lang="ts" setup>
 import { NTree, type TreeOption } from 'naive-ui';
-import { ref, type Ref } from 'vue';
+import { computed } from 'vue';
 import { Folder, type Item } from '../data/model.ts';
 import { useFileSystemStore } from '../data/data.ts';
 
@@ -56,7 +56,7 @@ const convertFolderToTree = (root: Folder): TreeOption[] => {
     return root.sub.map((item) => convertItem(item));
 };
 
-const data: Ref<TreeOption[]> = ref(
+const data = computed(() =>
     convertFolderToTree(dataStore.root.getSubDir(props.partition!)),
 );
 </script>

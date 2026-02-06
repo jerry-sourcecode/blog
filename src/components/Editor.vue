@@ -1,23 +1,39 @@
 <template>
-    <div
-        v-if="dataStore.isPreview"
-        :style="`height: ${editorHeight}`"
-        class="editor-container"
+    <n-tabs
+        v-if="dataStore.text.length != 0"
+        closable
+        size="small"
+        type="card"
+        @close="onTabClose"
     >
-        <!-- 完整的编辑器 -->
-        <VMdPreview
-            :height="editorHeight"
-            :text="text"
-            class="markdown-editor"
-        ></VMdPreview>
-    </div>
-    <div v-else class="editor-container">
-        <VMdEditor
-            v-model="text"
-            :height="editorHeight"
-            class="markdown-editor"
-        ></VMdEditor>
-    </div>
+        <n-tab-pane
+            v-for="(txt, idx) in dataStore.text"
+            :key="idx"
+            :name="idx"
+            :tab="txt.name"
+        >
+            <div
+                v-if="dataStore.isPreview"
+                :style="`height: ${editorHeight}`"
+                class="editor-container"
+            >
+                <!-- 完整的编辑器 -->
+                <VMdPreview
+                    :height="editorHeight"
+                    :text="dataStore.text[idx]!.content"
+                    class="markdown-editor"
+                ></VMdPreview>
+            </div>
+            <div v-else class="editor-container">
+                <VMdEditor
+                    v-model="dataStore.text[idx]!.content"
+                    :height="editorHeight"
+                    class="markdown-editor"
+                ></VMdEditor>
+            </div>
+        </n-tab-pane>
+    </n-tabs>
+    <n-empty v-else description="还没有打开的文件" size="huge" />
 </template>
 
 <script lang="ts" setup>
@@ -25,8 +41,7 @@ import { ref, onMounted, onUnmounted } from 'vue';
 import VMdEditor from '@kangc/v-md-editor';
 import VMdPreview from '@kangc/v-md-editor/lib/preview';
 import { useFileSystemStore } from '../data/data.ts';
-
-const text = defineModel<string>();
+import { NEmpty, NTabPane, NTabs } from 'naive-ui';
 
 const dataStore = useFileSystemStore();
 
@@ -42,7 +57,7 @@ const calculateHeight = () => {
         const appTop = appRect.top;
 
         // 计算可用高度：窗口高度减去app元素顶部位置
-        const availableHeight = windowHeight - appTop - 32 - 24 - 165; // 减去一些边距
+        const availableHeight = windowHeight - appTop - 32 - 24 - 150; // 减去一些边距
         editorHeight.value = `${availableHeight}px`;
     }
 };
@@ -55,6 +70,10 @@ onMounted(() => {
 onUnmounted(() => {
     window.removeEventListener('resize', calculateHeight);
 });
+
+function onTabClose(name: number) {
+    dataStore.text.splice(name, 1);
+}
 </script>
 
 <style>
