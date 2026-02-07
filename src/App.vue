@@ -19,17 +19,17 @@ const dataStore = useFileSystemStore();
 const FA = dataStore.root.subDir('A');
 const FB = dataStore.root.subDir('B');
 
-FA.subDir('B', 'File');
-FB.subDir('C').subDir('D').subDir('E', 'File');
+FA.subDir('B', 'Document');
+FB.subDir('C').subDir('D').subDir('E', 'Document').content = '11223333';
 
 dataStore.text.push(
-    new Document('你好', dataStore.root, '', '', 'nello world', '114514'),
+    new Document('你好', dataStore.root, '', '', 'nello world'),
 );
 dataStore.text.push(
-    new Document('再见', dataStore.root, '', '', 'nello world', '114514'),
+    new Document('再见', dataStore.root, '', '', 'nello world'),
 );
 dataStore.text.push(
-    new Document('你好', dataStore.root, '', '', 'nello world', '114514'),
+    new Document('你好', dataStore.root, '', '', 'nello world'),
 );
 
 const partition = ref(0);

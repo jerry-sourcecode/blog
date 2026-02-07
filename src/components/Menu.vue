@@ -1,14 +1,20 @@
 <template>
     <div>
-        <n-tree :data="data" block-line selectable></n-tree>
+        <n-tree
+            :data="data"
+            :node-props="nodeProps"
+            block-line
+            expand-on-click
+        ></n-tree>
     </div>
 </template>
 
 <script lang="ts" setup>
-import { NTree, type TreeOption } from 'naive-ui';
-import { computed } from 'vue';
+import { NTree, type TreeOption, NIcon } from 'naive-ui';
+import { computed, h } from 'vue';
 import { Folder, type Item } from '../data/model.ts';
 import { useFileSystemStore } from '../data/data.ts';
+import { Folder as IconFolder, FileTrayFullOutline } from '@vicons/ionicons5';
 
 const dataStore = useFileSystemStore();
 
@@ -28,6 +34,11 @@ const convertFolderToTree = (root: Folder): TreeOption[] => {
             const node: TreeOption = {
                 key: item.toString(),
                 label: item.name,
+                prefix: () => {
+                    return h(NIcon, null, {
+                        default: () => h(IconFolder),
+                    });
+                },
             };
 
             // 如果有子节点，递归转换子节点
@@ -42,6 +53,11 @@ const convertFolderToTree = (root: Folder): TreeOption[] => {
             return {
                 key: item.toString(),
                 label: item.name,
+                prefix: () => {
+                    return h(NIcon, null, {
+                        default: () => h(FileTrayFullOutline),
+                    });
+                },
                 // 文件节点没有children属性
             };
         }
@@ -55,6 +71,18 @@ const convertFolderToTree = (root: Folder): TreeOption[] => {
     // 转换根节点的所有子节点
     return root.sub.map((item) => convertItem(item));
 };
+
+function nodeProps({ option }: { option: TreeOption }) {
+    return {
+        onClick() {
+            if (!option.children && !option.disabled) {
+                dataStore.text.push(
+                    dataStore.fromString<Document>(option.key as string)!,
+                );
+            }
+        },
+    };
+}
 
 const data = computed(() =>
     convertFolderToTree(dataStore.root.getSubDir(props.partition!)),

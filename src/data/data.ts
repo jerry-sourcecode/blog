@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import { type Ref, ref } from 'vue';
-import { Document, File, Folder, type Item } from './model.ts';
+import { Document, File, Folder } from './model.ts';
 
 export const useFileSystemStore = defineStore('FileSystem', () => {
     const text: Ref<Document[]> = ref([]);
@@ -8,7 +8,7 @@ export const useFileSystemStore = defineStore('FileSystem', () => {
     const root = ref<Folder>(new Folder(':', null));
     let currentPartition = ref('');
 
-    function fromString(path: string): Item | null {
+    function fromString<T>(path: string): T | null {
         const parts = path.split('/').filter(Boolean); // Split the path and remove empty strings
         let current: Folder = root.value;
         const findFile = path[path.length - 1] !== '/';
@@ -24,7 +24,7 @@ export const useFileSystemStore = defineStore('FileSystem', () => {
                         if (!findFile || i != len - 1) {
                             continue;
                         } else {
-                            return sub;
+                            return sub as T;
                         }
                     }
                     current = sub;
@@ -37,7 +37,7 @@ export const useFileSystemStore = defineStore('FileSystem', () => {
                 return null;
             }
         }
-        return current;
+        return current as T;
     }
 
     return {
