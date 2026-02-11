@@ -1,44 +1,3 @@
-<script lang="ts" setup>
-import {
-    NLayout,
-    NLayoutSider,
-    NPageHeader,
-    NSpace,
-    NButton,
-    NTabs,
-    NTab,
-} from 'naive-ui';
-import Menu from './components/Menu.vue';
-import Editor from './components/Editor.vue';
-import { useFileSystemStore } from './data/data.ts';
-import { Document } from './data/model.ts';
-import { ref } from 'vue';
-
-const dataStore = useFileSystemStore();
-
-const FA = dataStore.root.subDir('A');
-const FB = dataStore.root.subDir('B');
-
-FA.subDir('B', 'Document');
-FB.subDir('C').subDir('D').subDir('E', 'Document').content = '11223333';
-
-dataStore.text.push(
-    new Document('你好', dataStore.root, '', '', 'nello world'),
-);
-dataStore.text.push(
-    new Document('再见', dataStore.root, '', '', 'nello world'),
-);
-dataStore.text.push(
-    new Document('你好', dataStore.root, '', '', 'nello world'),
-);
-
-const partition = ref(0);
-
-function onPartitionTabChange(name: number) {
-    partition.value = name;
-}
-</script>
-
 <template>
     <div>
         <n-page-header>
@@ -76,3 +35,33 @@ function onPartitionTabChange(name: number) {
         </n-layout>
     </div>
 </template>
+
+<script lang="ts" setup>
+import {
+    NLayout,
+    NLayoutSider,
+    NPageHeader,
+    NSpace,
+    NButton,
+    NTabs,
+    NTab,
+} from 'naive-ui';
+import Menu from './components/Menu.vue';
+import Editor from './components/Editor.vue';
+import { useFileSystemStore } from './data/data.ts';
+import { ref } from 'vue';
+
+const dataStore = useFileSystemStore();
+
+const FA = dataStore.root.subDir('A');
+const FB = dataStore.root.subDir('B');
+
+FA.subDir('B', 'Document');
+FB.subDir('C').subDir('D').subDir('E', 'Document').content = '11223333';
+
+const partition = ref(0);
+
+function onPartitionTabChange(name: number) {
+    partition.value = name;
+}
+</script>

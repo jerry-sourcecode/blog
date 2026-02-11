@@ -9,7 +9,8 @@ class Folder {
         this.pos = pos;
         this.sub = [];
     }
-    newSubDir(name: string, type?: 'Folder'): Folder;
+    newSubDir(name: string): Folder;
+    newSubDir(name: string, type: 'Folder'): Folder;
     newSubDir(name: string, type: 'Document'): Document;
     newSubDir(
         name: string,
@@ -21,35 +22,34 @@ class Folder {
         this.sub.push(k);
         return k;
     }
-    getSubDir(name: string, type?: 'Folder'): Folder;
+    getSubDir(name: string): Folder;
+    getSubDir(name: string, type: 'Folder'): Folder;
     getSubDir(name: string, type: 'Document'): Document;
     getSubDir(
         name: string,
         type: 'Document' | 'Folder' = 'Folder',
-    ): Document | Folder | null {
-        return (
+    ): Document | Folder {
+        const rtValue =
             (this.sub.find(
                 (x) =>
                     x.name === name &&
                     x instanceof (type === 'Document' ? Document : Folder),
-            ) as Document | Folder) ?? null
-        );
+            ) as Document | Folder) ?? null;
+        if (rtValue) return rtValue;
+        throw new Error(`Subfolders ${name} not found in ${this.toString()}.`);
     }
-    subDir(name: string, type?: 'Folder'): Folder;
+    subDir(name: string): Folder;
+    subDir(name: string, type: 'Folder'): Folder;
     subDir(name: string, type: 'Document'): Document;
     subDir(
         name: string,
         type: 'Document' | 'Folder' = 'Folder',
     ): Folder | Document {
-        if (type === 'Document')
-            return (
-                this.getSubDir(name, 'Document') ??
-                this.newSubDir(name, 'Document')
-            );
-        else
-            return (
-                this.getSubDir(name, 'Folder') ?? this.newSubDir(name, 'Folder')
-            );
+        try {
+            return this.getSubDir(name, type as any);
+        } catch {
+            return this.newSubDir(name, type as any);
+        }
     }
     toString(): string {
         if (this.pos == null) {
