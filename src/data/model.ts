@@ -58,7 +58,7 @@ class Folder {
         return this.pos!.toString() + this.name + '/';
     }
     filename(): string {
-        return this.name;
+        return this.name + '/';
     }
 }
 

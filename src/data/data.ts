@@ -14,7 +14,12 @@ export const useFileSystemStore = defineStore('FileSystem', () => {
         const findFile = path[path.length - 1] !== '/';
 
         for (let i = 1, len = parts.length; i < len; i++) {
-            const part = parts[i];
+            let part = parts[i];
+            // 处理 Folder 的 filename 后缀为 / 的问题
+            // 为寻找 Folder 的 part 增加 /
+            if (!findFile || i != len - 1) {
+                part += '/';
+            }
             let found = false;
             for (const sub of current.sub) {
                 if (i == len - 1 && findFile && sub instanceof Folder) continue;

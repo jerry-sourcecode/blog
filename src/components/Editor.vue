@@ -1,6 +1,7 @@
 <template>
     <n-tabs
         v-if="dataStore.text.length != 0"
+        v-model:value="tabValue"
         closable
         size="small"
         type="card"
@@ -32,10 +33,14 @@ import { MdEditor } from 'md-editor-v3';
 import 'md-editor-v3/lib/style.css';
 import { useFileSystemStore } from '../data/data.ts';
 import { NEmpty, NTabPane, NTabs } from 'naive-ui';
+import { useEmitter } from '../data/emitter.ts';
 
 const dataStore = useFileSystemStore();
+const emitter = useEmitter();
 
 const editorHeight = ref('auto');
+
+const tabValue = ref(0);
 
 // 计算编辑器高度
 const calculateHeight = () => {
@@ -64,6 +69,10 @@ onUnmounted(() => {
 function onTabClose(name: number) {
     dataStore.text.splice(name, 1);
 }
+
+emitter.on('documentAppend', (idx: number) => {
+    tabValue.value = idx;
+});
 </script>
 
 <style>

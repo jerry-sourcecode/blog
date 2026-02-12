@@ -9,7 +9,12 @@
                 style="width: 600px"
                 title="设置文件属性"
             >
-                <n-form :model="formValue" :rules="rules" size="large">
+                <n-form
+                    ref="formRef"
+                    :model="formValue"
+                    :rules="rules"
+                    size="large"
+                >
                     <n-form-item label="文件类型" path="type">
                         <n-select
                             v-model:value="formValue.type"
@@ -70,6 +75,7 @@
         </div>
         <n-tree
             ref="treeRef"
+            v-model:expanded-keys="treeExpandedKeys"
             :data="data"
             :node-props="nodeProps"
             block-line
@@ -93,6 +99,8 @@ import {
     NFormItem,
     NInput,
     NSelect,
+    type FormItemRule,
+    type FormInst,
 } from 'naive-ui';
 import { computed, h, type Ref, ref } from 'vue';
 import { Folder, Document, File, type Item } from '../data/model.ts';
@@ -102,72 +110,81 @@ import {
     DocumentTextOutline,
     AddOutline,
 } from '@vicons/ionicons5';
+import { useEmitter } from '../data/emitter.ts';
 
 const dataStore = useFileSystemStore();
+const emitter = useEmitter();
+
+const formRef: Ref<FormInst | null> = ref(null);
 
 const props = defineProps({
     partition: String,
 });
 
 const convertFolderToTree = (root: Folder): TreeOption[] => {
-    /**
-     * 递归转换函数
-     * @param item - 要转换的Item节点
-     * @returns 转换后的TreeOption
-     */
+    function sort(fol: Folder) {
+        return fol.sub.sort((a, b) => {
+            if (a instanceof Folder && !(b instanceof Folder)) return -1;
+            if (!(a instanceof Folder) && b instanceof Folder) return 1;
+            return a.name.localeCompare(b.name);
+        });
+    }
+    // 递归转换函数
     const convertItem = (item: Item): TreeOption => {
-        // 处理文件夹类型
         if (item instanceof Folder) {
             const node: TreeOption = {
                 key: item.toString(),
                 label: item.name,
-                prefix: () => {
-                    return h(NIcon, null, {
-                        default: () => h(FolderOutline),
-                    });
-                },
+                prefix: () =>
+                    h(NIcon, null, { default: () => h(FolderOutline) }),
             };
 
-            // 如果有子节点，递归转换子节点
             if (item.sub && item.sub.length > 0) {
-                node.children = item.sub.map((subItem) => convertItem(subItem));
+                // 对子节点进行排序：文件夹优先，其余文件按字典序
+                const sortedSubItems = sort(item);
+
+                node.children = sortedSubItems.map((subItem) =>
+                    convertItem(subItem),
+                );
             }
 
             return node;
-        }
-        // 处理文件或Document类型
-        else {
+        } else {
             return {
                 key: item.toString(),
                 label: item.name,
-                prefix: () => {
-                    return h(NIcon, null, {
-                        default: () => h(DocumentTextOutline),
-                    });
-                },
-                // 文件节点没有children属性
+                prefix: () =>
+                    h(NIcon, null, { default: () => h(DocumentTextOutline) }),
             };
         }
     };
 
-    // 忽略根节点，只处理根节点的子节点
     if (!root.sub || root.sub.length === 0) {
         return [];
     }
 
-    // 转换根节点的所有子节点
-    return root.sub.map((item) => convertItem(item));
+    // 对根节点的所有子节点进行排序
+    const sortedRootSubItems = sort(root);
+
+    return sortedRootSubItems.map((item) => convertItem(item));
 };
 
+/**
+ * 为节点设置属性，包括点击事件处理。
+ * @param param - 包含配置选项的对象
+ * @param param.option - 树节点的选项对象，包含children, disabled, key等属性
+ * @return 返回一个对象，该对象包含一个onClick方法，用于处理节点被点击时的行为
+ */
 function nodeProps({ option }: { option: TreeOption }) {
     return {
         onClick() {
-            if (!option.children && !option.disabled) {
+            if (!(option.key as string).endsWith('/') && !option.disabled) {
                 dataStore.text.push(
                     dataStore.fromString<Document>(
                         option.key as string,
                     ) as Document,
                 );
+                emitter.emit('documentAppend', dataStore.text.length - 1);
             }
         },
     };
@@ -202,7 +219,18 @@ function handleSelect() {
 // 文件命名 ---------------------------
 const showModal = ref(false);
 
+/**
+ * 重命名指定的项目。
+ * @param item - 要重命名的项目。
+ * @return 不返回任何值。
+ */
 function rename(item: Item): void;
+/**
+ * 在指定文件夹中新建项目
+ * @param item 此处固定为 'Create'
+ * @param dir 包含要新建项目的文件夹
+ * @return 无返回值
+ */
 function rename(item: 'Create', dir: Folder): void;
 function rename(item: Item | 'Create', dir?: Folder): void {
     formValue.value.name = '';
@@ -218,10 +246,21 @@ function rename(item: Item | 'Create', dir?: Folder): void {
 
     isCreate.value = typeof item === 'string';
     target.value = isCreate.value ? dir : (item as Item);
+
+    let fol: Folder;
+    if (isCreate.value) {
+        fol = target.value as Folder;
+    } else {
+        fol = target.value?.pos!;
+    }
+    fol.sub.forEach((item) => {
+        filenameSet.add(item.filename());
+    });
 }
 
 const target: Ref<Item | undefined> = ref(undefined);
 const isCreate: Ref<boolean> = ref(false);
+const filenameSet = new Set();
 
 const formValue = ref({
     type: '',
@@ -275,12 +314,35 @@ const typeOptions: SelectOption[] = [
 const rules = {
     name: {
         required: true,
-        message: '请输入文件名',
-        trigger: 'blur',
+        validator(_: FormItemRule, value: string) {
+            if (!value) {
+                return new Error('请输入文件名');
+            }
+            if (value.includes('/') || value.includes(':')) {
+                return new Error('不能含有 / 或 : ');
+            }
+            let suf;
+            if (formValue.value.type === 'Folder') suf = '/';
+            if (formValue.value.type === 'Document') suf = '.doc';
+            if (filenameSet.has(value + suf)) {
+                return new Error(`该目录下已含有同名文件。`);
+            }
+            return true;
+        },
+        trigger: ['input', 'blur'],
     },
 };
 
-function onDetermine() {
+async function onDetermine() {
+    try {
+        // 验证：如果不通过，会 reject 并抛入 catch
+        await formRef.value?.validate();
+    } catch (errors) {
+        // 信息不通过校验
+        // 直接返回拒绝提交请求
+        return;
+    }
+
     let item;
     if (isCreate.value) {
         if (formValue.value.type === 'Folder') {
@@ -307,7 +369,10 @@ function onDetermine() {
     }
 
     showModal.value = false;
+    if (isCreate.value) treeExpandedKeys.value.push(target.value!.toString());
 }
+
+const treeExpandedKeys: Ref<string[]> = ref([]);
 // 文件命名（终）-----------------------------
 </script>
 
