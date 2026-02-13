@@ -45,11 +45,7 @@
                         />
                     </n-form-item>
                     <n-form-item>
-                        <n-button
-                            style="margin-right: 20px"
-                            type="info"
-                            @click="onDetermine"
-                        >
+                        <n-button type="info" @click="onDetermine">
                             确定
                         </n-button>
                         <n-button @click="showModal = false"> 取消 </n-button>
@@ -57,14 +53,10 @@
                 </n-form>
             </n-card>
         </n-modal>
-        <div>
-            <n-tooltip trigger="hover">
+        <div style="margin-top: 5px">
+            <n-tooltip v-if="!isChecking" trigger="hover">
                 <template #trigger>
-                    <n-button
-                        style="font-size: 24px; margin-top: 10px"
-                        text
-                        @click="handleSelect"
-                    >
+                    <n-button class="icon" text @click="handleSelect">
                         <n-icon>
                             <AddOutline />
                         </n-icon>
@@ -72,12 +64,35 @@
                 </template>
                 增加文件或目录
             </n-tooltip>
+            <n-tooltip trigger="hover">
+                <template #trigger>
+                    <n-button class="icon" text @click="handleStartCheck">
+                        <n-icon>
+                            <CheckOutline />
+                        </n-icon>
+                    </n-button>
+                </template>
+                <span v-if="isChecking">取消</span>选择
+            </n-tooltip>
+            <n-tooltip v-if="isChecking" trigger="hover">
+                <template #trigger>
+                    <n-button class="icon" text @click="handleRemove">
+                        <n-icon>
+                            <RiDeleteBinLine />
+                        </n-icon>
+                    </n-button>
+                </template>
+                删除所选项
+            </n-tooltip>
         </div>
         <n-tree
             ref="treeRef"
+            v-model:checked-keys="treeCheckedKeys"
             v-model:expanded-keys="treeExpandedKeys"
+            :checkable="isChecking"
             :data="data"
             :node-props="nodeProps"
+            :style="`height: ${treeHeight}; overflow-y: auto`"
             block-line
             expand-on-click
             @update:selected-keys="onKeySelected"
@@ -101,21 +116,26 @@ import {
     NSelect,
     type FormItemRule,
     type FormInst,
+    type TreeInst,
+    useNotification,
 } from 'naive-ui';
-import { computed, h, type Ref, ref } from 'vue';
+import { computed, h, onMounted, onUnmounted, type Ref, ref } from 'vue';
 import { Folder, Document, File, type Item } from '../data/model.ts';
 import { useFileSystemStore } from '../data/data.ts';
 import {
-    FolderOutline,
-    DocumentTextOutline,
-    AddOutline,
-} from '@vicons/ionicons5';
+    RiFolder2Line as FolderOutline,
+    RiFileLine as DocumentTextOutline,
+    RiAddLine as AddOutline,
+    RiListCheck3 as CheckOutline,
+    RiDeleteBinLine,
+} from '@remixicon/vue';
 import { useEmitter } from '../data/emitter.ts';
 
 const dataStore = useFileSystemStore();
 const emitter = useEmitter();
 
 const formRef: Ref<FormInst | null> = ref(null);
+const treeRef: Ref<TreeInst | null> = ref(null);
 
 const props = defineProps({
     partition: String,
@@ -369,11 +389,109 @@ async function onDetermine() {
     }
 
     showModal.value = false;
-    if (isCreate.value) treeExpandedKeys.value.push(target.value!.toString());
+    if (isCreate.value) {
+        while (
+            !(target.value as Folder).isSystem() &&
+            treeExpandedKeys.value.findIndex(
+                (v) => v === target.value!.toString(),
+            ) === -1
+        ) {
+            treeExpandedKeys.value.push(target.value!.toString());
+            target.value = target.value!.pos!;
+        }
+    }
 }
 
 const treeExpandedKeys: Ref<string[]> = ref([]);
+const treeCheckedKeys: Ref<string[]> = ref([]);
 // 文件命名（终）-----------------------------
+
+// 处理滚动条
+
+const treeHeight = ref('auto');
+
+// 计算编辑器高度
+const calculateHeight = () => {
+    const windowHeight = window.innerHeight;
+    const appElement = document.getElementById('app');
+
+    if (appElement) {
+        const appRect = appElement.getBoundingClientRect();
+        const appTop = appRect.top;
+
+        // 计算可用高度：窗口高度减去app元素顶部位置
+        // 如果发现容器超出屏幕或剩余大量空白，可以调整这里的常数
+        const offset = 32 + 24 + 100;
+        const availableHeight = windowHeight - appTop - offset;
+        treeHeight.value = `${availableHeight}px`;
+    }
+};
+
+onMounted(() => {
+    calculateHeight();
+    window.addEventListener('resize', calculateHeight);
+});
+
+onUnmounted(() => {
+    window.removeEventListener('resize', calculateHeight);
+});
+// 处理滚动条（终）
+
+// 处理选择
+const isChecking = ref(false);
+const notification = useNotification();
+
+function handleStartCheck() {
+    isChecking.value = !isChecking.value;
+}
+
+function handleRemove() {
+    const arr = treeRef.value?.getCheckedData();
+    if (arr?.keys.length === 0) {
+        notification.error({
+            title: '无法删除',
+            content: `没有选中文件，无法进行删除。`,
+            duration: 3000,
+            keepAliveOnHover: true,
+        });
+        return;
+    }
+    let succ = 0;
+    arr?.keys?.forEach((key) => {
+        if (dataStore.removeItem(key as string)) {
+            succ++;
+            // 处理删除
+            if (selectedKeys.value === key) {
+                selectedKeys.value = undefined;
+            }
+            if (treeExpandedKeys.value.find((v) => v === key)) {
+                treeExpandedKeys.value.splice(
+                    treeExpandedKeys.value.findIndex((v) => v === key),
+                    1,
+                );
+            }
+            if (treeCheckedKeys.value.find((v) => v === key)) {
+                treeCheckedKeys.value.splice(
+                    treeCheckedKeys.value.findIndex((v) => v === key),
+                    1,
+                );
+            }
+        }
+    });
+    const has_num: number = arr?.keys.length!;
+    notification[succ === has_num ? 'success' : 'error']({
+        title: '删除操作报告',
+        content: `共尝试删除${has_num}个文件或文件夹，成功删除${succ}个，成功率${Math.round((has_num * 100) / succ)}%`,
+        duration: 3000,
+        keepAliveOnHover: true,
+    });
+}
+// 处理选择（终）
 </script>
 
-<style scoped></style>
+<style scoped>
+.icon {
+    font-size: 24px;
+    margin-right: 7px;
+}
+</style>

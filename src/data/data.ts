@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import { type Ref, ref } from 'vue';
-import { Document, File, Folder } from './model.ts';
+import { Document, File, Folder, type Item } from './model.ts';
 
 export const useFileSystemStore = defineStore('FileSystem', () => {
     const text: Ref<Document[]> = ref([]);
@@ -45,9 +45,22 @@ export const useFileSystemStore = defineStore('FileSystem', () => {
         return current as T;
     }
 
+    function removeItem(path: string): boolean {
+        const item = fromString<Item>(path);
+        if (item == null) return false;
+        const fa = item?.pos;
+        if (!fa) return false;
+        fa.sub.splice(
+            fa.sub.findIndex((v) => v.toString() === path),
+            1,
+        );
+        return true;
+    }
+
     return {
         root,
         fromString,
+        removeItem,
         text,
         currentPartition,
     };

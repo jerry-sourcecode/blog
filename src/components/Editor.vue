@@ -38,9 +38,9 @@ import { useEmitter } from '../data/emitter.ts';
 const dataStore = useFileSystemStore();
 const emitter = useEmitter();
 
-const editorHeight = ref('auto');
-
 const tabValue = ref(0);
+
+const editorHeight = ref('auto');
 
 // 计算编辑器高度
 const calculateHeight = () => {
@@ -52,7 +52,9 @@ const calculateHeight = () => {
         const appTop = appRect.top;
 
         // 计算可用高度：窗口高度减去app元素顶部位置
-        const availableHeight = windowHeight - appTop - 32 - 24 - 150; // 减去一些边距
+        // 如果发现容器超出屏幕或剩余大量空白，可以调整这里的常数
+        const offset = 32 + 24 + 150; // 偏移量
+        const availableHeight = windowHeight - appTop - offset;
         editorHeight.value = `${availableHeight}px`;
     }
 };

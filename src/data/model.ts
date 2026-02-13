@@ -60,6 +60,12 @@ class Folder {
     filename(): string {
         return this.name + '/';
     }
+    isRoot(): boolean {
+        return this.pos == null;
+    }
+    isSystem(): boolean {
+        return this.isRoot() || this.pos?.pos === null;
+    }
 }
 
 class File {
