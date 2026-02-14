@@ -11,7 +11,7 @@ export const useFileSystemStore = defineStore('FileSystem', () => {
 
     function fromString<T>(path: string): T | null {
         const parts = path.split('/').filter(Boolean); // Split the path and remove empty strings
-        let current = root.value;
+        let current: Item = root.value;
         const findFile = path[path.length - 1] !== '/';
 
         for (let i = 1, len = parts.length; i < len; i++) {
@@ -22,7 +22,7 @@ export const useFileSystemStore = defineStore('FileSystem', () => {
                 part += '/';
             }
             let found = false;
-            for (const sub of current.sub) {
+            for (const sub of (current as Folder).sub) {
                 if (i == len - 1 && findFile && sub instanceof Folder) continue;
                 if (i == len - 1 && !findFile && sub instanceof File) continue;
                 if (sub.filename() === part) {
@@ -52,7 +52,7 @@ export const useFileSystemStore = defineStore('FileSystem', () => {
         const fa = item?.pos;
         if (!fa) return false;
         fa.sub.splice(
-            fa.sub.findIndex((v) => v.toString() === path),
+            fa.sub.findIndex((v) => v.to_string() === path),
             1,
         );
         return true;

@@ -1,16 +1,12 @@
-type Item = File | Folder;
+// type Item = File | Folder;
 
-class Folder {
+class Item {
     name: string;
-    sub: Item[];
     pos_path: string | null = null;
-    private pos_obj: Folder | null = null;
+    protected pos_obj: Folder | null = null;
 
-    constructor(name: string, pos: Folder | null) {
-        this.name = name;
-        this.pos = pos;
-        this.pos_path = pos?.toString() ?? null;
-        this.sub = [];
+    constructor() {
+        this.name = '';
     }
 
     get pos(): Folder | null {
@@ -18,8 +14,36 @@ class Folder {
     }
 
     set pos(newValue: Folder | null) {
-        this.pos_path = newValue?.toString() ?? null;
+        this.pos_path = newValue?.to_string() ?? null;
         this.pos_obj = newValue;
+    }
+
+    isORin(fa: Folder): boolean {
+        const thisPath = this.to_string();
+        const faPath = fa.to_string();
+
+        return thisPath.startsWith(faPath);
+    }
+    to_string() {
+        return this.name;
+    }
+    toString() {
+        throw Error('你可能拼错了！正确获取路径调用 to_string() ');
+    }
+    filename() {
+        return this.name;
+    }
+}
+
+class Folder extends Item {
+    sub: Item[];
+
+    constructor(name: string, pos: Folder | null) {
+        super();
+        this.name = name;
+        this.pos = pos;
+        this.pos_path = pos?.to_string() ?? null;
+        this.sub = [];
     }
 
     newSubDir(name: string): Folder;
@@ -30,7 +54,7 @@ class Folder {
         type: 'Document' | 'Folder' = 'Folder',
     ): Folder | Document {
         let k;
-        if (type === 'Document') k = new Document(name, this, '', '', '');
+        if (type === 'Document') k = new Document(name, this, '匿名', name, '');
         else k = new Folder(name, this);
         this.sub.push(k);
         return k;
@@ -49,7 +73,7 @@ class Folder {
                     x instanceof (type === 'Document' ? Document : Folder),
             ) as Document | Folder) ?? null;
         if (rtValue) return rtValue;
-        throw new Error(`Subfolders ${name} not found in ${this.toString()}.`);
+        throw new Error(`Subfolders ${name} not found in ${this.to_string()}.`);
     }
     subDir(name: string): Folder;
     subDir(name: string, type: 'Folder'): Folder;
@@ -64,14 +88,14 @@ class Folder {
             return this.newSubDir(name, type as any);
         }
     }
-    toString(): string {
+    to_string(): string {
         if (this.pos == null) {
             return this.name + '/';
         }
-        return this.pos!.toString() + this.name + '/';
+        return this.pos!.to_string() + this.name + '/';
     }
     filename(): string {
-        return this.name + '/';
+        return super.filename() + '/';
     }
     isRoot(): boolean {
         return this.pos == null;
@@ -79,33 +103,34 @@ class Folder {
     isSystem(): boolean {
         return this.isRoot() || this.pos?.pos === null;
     }
+    /**
+     * 检查当前项是否在给定文件夹的子孙目录中
+     * @param fa 目标文件夹对象
+     * @returns 如果当前项在 fa 内部且不是 fa 本身，返回 true；否则返回 false
+     */
 }
 
-class File {
-    name: string;
-    pos_path: string = '';
-    private pos_obj: Folder | null = null;
-
+class File extends Item {
     constructor(name: string, pos: Folder) {
-        this.pos_path = pos?.toString() ?? null;
+        super();
+        this.pos_path = pos?.to_string() ?? null;
         this.name = name;
         this.pos = pos;
     }
 
     get pos(): Folder {
-        return this.pos_obj!;
+        return super.pos!;
     }
 
     set pos(newValue: Folder) {
-        this.pos_path = newValue?.toString();
-        this.pos_obj = newValue;
+        super.pos = newValue;
     }
 
-    toString(): string {
-        return this.pos.toString() + this.name;
+    to_string(): string {
+        return this.pos.to_string() + this.name;
     }
     filename(): string {
-        return this.name;
+        return super.filename();
     }
 }
 
@@ -129,8 +154,8 @@ class Document extends File {
         this.creationTime = new Date();
         this.lastModifiedTime = new Date();
     }
-    toString(): string {
-        return super.toString() + '.doc';
+    to_string(): string {
+        return super.to_string() + '.doc';
     }
     filename(): string {
         return super.filename() + '.doc';

@@ -18,6 +18,7 @@
                     <n-form-item label="文件类型" path="type">
                         <n-select
                             v-model:value="formValue.type"
+                            :disabled="formValue.isTypeFixed"
                             :options="typeOptions"
                             @update:value="onUpdateTypeSelect"
                         />
@@ -66,6 +67,19 @@
                 </template>
                 增加文件或目录
             </n-tooltip>
+            <n-tooltip v-if="!isChecking">
+                <template #trigger>
+                    <n-button
+                        :disabled="selectedKeys === undefined"
+                        class="icon"
+                        text
+                        @click="handleRename"
+                    >
+                        <RenameIcon />
+                    </n-button>
+                </template>
+                设置文件属性
+            </n-tooltip>
             <n-tooltip>
                 <template #trigger>
                     <n-button class="icon" text @click="handleStartCheck">
@@ -76,7 +90,12 @@
             </n-tooltip>
             <n-tooltip v-if="isChecking">
                 <template #trigger>
-                    <n-button class="icon" text @click="handleRemove">
+                    <n-button
+                        :disabled="treeCheckedKeys.length === 0"
+                        class="icon"
+                        text
+                        @click="handleRemove"
+                    >
                         <DeleteIcon />
                     </n-button>
                 </template>
@@ -84,20 +103,32 @@
             </n-tooltip>
             <n-tooltip v-if="isChecking">
                 <template #trigger>
-                    <n-button class="icon" text @click="handleMove">
+                    <n-button
+                        :disabled="treeCheckedKeys.length === 0"
+                        class="icon"
+                        text
+                        @click="handleMove"
+                    >
                         <MoveIcon />
                     </n-button>
                 </template>
-                {{ treeCheckedKeys.length }}个文件移动到 {{ selectedDir.name }}
+                将所选{{ treeCheckedKeys.length }}个文件移动到
+                {{ selectedDir.name }}
                 <span v-if="selectedDir.isSystem()">分区</span>
             </n-tooltip>
             <n-tooltip v-if="isChecking">
                 <template #trigger>
-                    <n-button class="icon" text @click="handlePaste">
+                    <n-button
+                        :disabled="treeCheckedKeys.length === 0"
+                        class="icon"
+                        text
+                        @click="handlePaste"
+                    >
                         <PasteIcon />
                     </n-button>
                 </template>
-                {{ treeCheckedKeys.length }}个文件粘贴到 {{ selectedDir.name }}
+                将所选{{ treeCheckedKeys.length }}个文件粘贴到
+                {{ selectedDir.name }}
                 <span v-if="selectedDir.isSystem()">分区</span>
             </n-tooltip>
         </div>
@@ -108,6 +139,7 @@
             :checkable="isChecking"
             :data="data"
             :node-props="nodeProps"
+            :render-label="renderLabel"
             :style="`height: ${treeHeight}; overflow-y: auto`"
             block-line
             expand-on-click
@@ -135,7 +167,15 @@ import {
     type TreeInst,
     useNotification,
 } from 'naive-ui';
-import { computed, h, onMounted, onUnmounted, type Ref, ref } from 'vue';
+import {
+    computed,
+    h,
+    onMounted,
+    onUnmounted,
+    type Ref,
+    ref,
+    type VNodeChild,
+} from 'vue';
 import { Folder, Document, File, type Item } from '../data/model.ts';
 import { useFileSystemStore } from '../data/data.ts';
 import {
@@ -146,8 +186,10 @@ import {
     RiDeleteBinLine as DeleteIcon,
     RiFileTransferLine as MoveIcon,
     RiClipboardLine as PasteIcon,
+    RiInputField as RenameIcon,
 } from '@remixicon/vue';
 import { useEmitter } from '../utils/emitter.ts';
+import TreeLabelPopover from './TreeLabelPopover.vue';
 
 const dataStore = useFileSystemStore();
 const emitter = useEmitter();
@@ -171,7 +213,7 @@ const convertFolderToTree = (root: Folder): TreeOption[] => {
     const convertItem = (item: Item): TreeOption => {
         if (item instanceof Folder) {
             const node: TreeOption = {
-                key: item.toString(),
+                key: item.to_string(),
                 label: item.name,
                 prefix: () => h(NIcon, null, { default: () => h(FolderIcon) }),
             };
@@ -188,7 +230,7 @@ const convertFolderToTree = (root: Folder): TreeOption[] => {
             return node;
         } else {
             return {
-                key: item.toString(),
+                key: item.to_string(),
                 label: item.name,
                 prefix: () =>
                     h(NIcon, null, { default: () => h(DocumentIcon) }),
@@ -217,7 +259,7 @@ function nodeProps({ option }: { option: TreeOption }) {
         onClick() {
             // 如果已经打开，则不打开
             if (
-                dataStore.text.find((v) => v.toString() === option.key) !==
+                dataStore.text.find((v) => v.to_string() === option.key) !==
                 undefined
             )
                 return;
@@ -256,7 +298,7 @@ const selectedDir = computed(() => {
     if (selectedItem.value instanceof File) {
         return selectedItem.value.pos;
     } else {
-        return selectedItem.value;
+        return selectedItem.value as Folder;
     }
 });
 
@@ -267,7 +309,7 @@ function handleSelect() {
         if (sl instanceof File) {
             sl = sl.pos;
         }
-        select = sl;
+        select = sl as Folder;
     }
     rename('Create', select);
 }
@@ -291,14 +333,21 @@ function rename(item: Item): void;
  */
 function rename(item: 'Create', dir: Folder): void;
 function rename(item: Item | 'Create', dir?: Folder): void {
-    formValue.value.name = '';
+    formValue.value.name = item === 'Create' ? '' : item.name;
     formValue.value.title = '';
     formValue.value.auth = '';
+    formValue.value.isTypeFixed = item !== 'Create';
 
     hasAttu.value.name = true;
 
     // 默认 Folder
     onUpdateTypeSelect('Folder');
+
+    if (item instanceof Document) {
+        onUpdateTypeSelect('Document');
+        formValue.value.title = item.title;
+        formValue.value.auth = item.writer;
+    }
 
     showModal.value = true;
 
@@ -312,6 +361,10 @@ function rename(item: Item | 'Create', dir?: Folder): void {
         fol = target.value?.pos!;
     }
     fol.sub.forEach((item) => {
+        // 剔除自身
+        if (!isCreate.value && target.value?.to_string() === item.to_string()) {
+            return;
+        }
         filenameSet.add(item.filename());
     });
 }
@@ -325,6 +378,7 @@ const formValue = ref({
     name: '',
     auth: '',
     title: '',
+    isTypeFixed: false,
 });
 
 const hasAttu = ref({
@@ -412,9 +466,10 @@ async function onDetermine() {
             );
         }
     } else {
-        item = target;
+        item = target.value;
     }
 
+    item!.name = formValue.value.name;
     switch (formValue.value.type) {
         case 'Folder': {
             break;
@@ -431,10 +486,10 @@ async function onDetermine() {
         while (
             !(target.value as Folder).isSystem() &&
             treeExpandedKeys.value.findIndex(
-                (v) => v === target.value!.toString(),
+                (v) => v === target.value!.to_string(),
             ) === -1
         ) {
-            treeExpandedKeys.value.push(target.value!.toString());
+            treeExpandedKeys.value.push(target.value!.to_string());
             target.value = target.value!.pos!;
         }
     }
@@ -481,6 +536,7 @@ const notification = useNotification();
 
 function handleStartCheck() {
     isChecking.value = !isChecking.value;
+    treeCheckedKeys.value = [];
 }
 
 function handleRemove() {
@@ -520,35 +576,75 @@ function handleRemove() {
     notification[succ === has_num ? 'success' : 'error']({
         title: '删除操作报告',
         content: `共尝试删除${has_num}个文件或文件夹，成功删除${succ}个，成功率${Math.round((has_num * 100) / succ)}%`,
-        duration: 2000,
+        duration: 5000,
         keepAliveOnHover: true,
     });
 }
 
 // 处理移动、粘贴
 function handlePaste() {
-    let counts = 0;
+    let counts = 0,
+        success = 0,
+        fail_duplicateFile = 0, // 复制时重名
+        fail_copyToASubfolder = 0; // 尝试将父文件夹复制到子文件夹
+    let script = '';
     treeCheckedKeys.value.forEach((v) => {
         const copied = dataStore.copy(dataStore.fromString<Item>(v)!);
-        copied.pos = selectedDir.value;
-        selectedDir.value.sub.push(copied);
         counts++;
+        if (copied instanceof Folder && selectedDir.value.isORin(copied)) {
+            fail_copyToASubfolder++;
+            script += `${copied.name} 由于试图移动到其子文件夹而被阻止。\n`;
+            return;
+        }
+        copied.pos = selectedDir.value as Folder;
+        if (dataStore.fromString(copied.to_string()) !== null) {
+            script += `${copied.name} 由于与已有文件重名而被阻止。\n`;
+            fail_duplicateFile++;
+            return;
+        }
+        selectedDir.value.sub.push(copied);
+        success++;
     });
-    notification.success({
-        title: '粘贴成功',
-        content: `共粘贴了${counts}个文件或文件夹`,
-        duration: 2000,
+    if (counts === 0) {
+        notification.error({
+            title: '粘贴错误',
+            content: `没有选择粘贴的文件。`,
+            duration: 3000,
+            keepAliveOnHover: true,
+        });
+        return;
+    }
+    notification[success === counts ? 'success' : 'error']({
+        title: '粘贴操作完成',
+        content: `共粘贴了${counts}个文件或文件夹，其中成功了${success}个。\n${script}`,
+        duration: 5000,
         keepAliveOnHover: true,
     });
+    treeCheckedKeys.value = [];
 }
 function handleMove() {
     handlePaste();
     handleRemove();
     notification.success({
         title: '移动成功',
-        duration: 2000,
+        duration: 5000,
         keepAliveOnHover: true,
     });
+}
+function handleRename() {
+    rename(selectedItem.value);
+}
+
+// 侧边弹出
+function renderLabel(info: { option: TreeOption }): VNodeChild {
+    info.option.key = info.option.key as string;
+    if (info.option.key[(info.option.key as string).length - 1] === '/')
+        return h('span', info.option.label!);
+    else
+        return h(TreeLabelPopover, {
+            label: info.option.label,
+            info: dataStore.fromString<Document>(info.option.key as string)!,
+        });
 }
 </script>
 
