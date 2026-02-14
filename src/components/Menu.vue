@@ -45,44 +45,60 @@
                         />
                     </n-form-item>
                     <n-form-item>
-                        <n-button type="info" @click="onDetermine">
+                        <n-button
+                            style="margin-right: 10px"
+                            type="info"
+                            @click="onDetermine"
+                        >
                             确定
                         </n-button>
-                        <n-button @click="showModal = false"> 取消 </n-button>
+                        <n-button @click="showModal = false">取消</n-button>
                     </n-form-item>
                 </n-form>
             </n-card>
         </n-modal>
         <div style="margin-top: 5px">
-            <n-tooltip v-if="!isChecking" trigger="hover">
+            <n-tooltip v-if="!isChecking">
                 <template #trigger>
                     <n-button class="icon" text @click="handleSelect">
-                        <n-icon>
-                            <AddOutline />
-                        </n-icon>
+                        <AddIcon />
                     </n-button>
                 </template>
                 增加文件或目录
             </n-tooltip>
-            <n-tooltip trigger="hover">
+            <n-tooltip>
                 <template #trigger>
                     <n-button class="icon" text @click="handleStartCheck">
-                        <n-icon>
-                            <CheckOutline />
-                        </n-icon>
+                        <CheckIcon />
                     </n-button>
                 </template>
                 <span v-if="isChecking">取消</span>选择
             </n-tooltip>
-            <n-tooltip v-if="isChecking" trigger="hover">
+            <n-tooltip v-if="isChecking">
                 <template #trigger>
                     <n-button class="icon" text @click="handleRemove">
-                        <n-icon>
-                            <RiDeleteBinLine />
-                        </n-icon>
+                        <DeleteIcon />
                     </n-button>
                 </template>
-                删除所选项
+                删除所选{{ treeCheckedKeys.length }}个文件
+            </n-tooltip>
+            <n-tooltip v-if="isChecking">
+                <template #trigger>
+                    <n-button class="icon" text @click="handleMove">
+                        <MoveIcon />
+                    </n-button>
+                </template>
+                {{ treeCheckedKeys.length }}个文件移动到 {{ selectedDir.name }}
+                <span v-if="selectedDir.isSystem()">分区</span>
+            </n-tooltip>
+            <n-tooltip v-if="isChecking">
+                <template #trigger>
+                    <n-button class="icon" text @click="handlePaste">
+                        <PasteIcon />
+                    </n-button>
+                </template>
+                {{ treeCheckedKeys.length }}个文件粘贴到 {{ selectedDir.name }}
+                <span v-if="selectedDir.isSystem()">分区</span>
             </n-tooltip>
         </div>
         <n-tree
@@ -123,13 +139,15 @@ import { computed, h, onMounted, onUnmounted, type Ref, ref } from 'vue';
 import { Folder, Document, File, type Item } from '../data/model.ts';
 import { useFileSystemStore } from '../data/data.ts';
 import {
-    RiFolder2Line as FolderOutline,
-    RiFileLine as DocumentTextOutline,
-    RiAddLine as AddOutline,
-    RiListCheck3 as CheckOutline,
-    RiDeleteBinLine,
+    RiFolder2Line as FolderIcon,
+    RiFileLine as DocumentIcon,
+    RiAddLine as AddIcon,
+    RiListCheck3 as CheckIcon,
+    RiDeleteBinLine as DeleteIcon,
+    RiFileTransferLine as MoveIcon,
+    RiClipboardLine as PasteIcon,
 } from '@remixicon/vue';
-import { useEmitter } from '../data/emitter.ts';
+import { useEmitter } from '../utils/emitter.ts';
 
 const dataStore = useFileSystemStore();
 const emitter = useEmitter();
@@ -155,8 +173,7 @@ const convertFolderToTree = (root: Folder): TreeOption[] => {
             const node: TreeOption = {
                 key: item.toString(),
                 label: item.name,
-                prefix: () =>
-                    h(NIcon, null, { default: () => h(FolderOutline) }),
+                prefix: () => h(NIcon, null, { default: () => h(FolderIcon) }),
             };
 
             if (item.sub && item.sub.length > 0) {
@@ -174,7 +191,7 @@ const convertFolderToTree = (root: Folder): TreeOption[] => {
                 key: item.toString(),
                 label: item.name,
                 prefix: () =>
-                    h(NIcon, null, { default: () => h(DocumentTextOutline) }),
+                    h(NIcon, null, { default: () => h(DocumentIcon) }),
             };
         }
     };
@@ -198,6 +215,12 @@ const convertFolderToTree = (root: Folder): TreeOption[] => {
 function nodeProps({ option }: { option: TreeOption }) {
     return {
         onClick() {
+            // 如果已经打开，则不打开
+            if (
+                dataStore.text.find((v) => v.toString() === option.key) !==
+                undefined
+            )
+                return;
             if (!(option.key as string).endsWith('/') && !option.disabled) {
                 dataStore.text.push(
                     dataStore.fromString<Document>(
@@ -221,6 +244,21 @@ const selectedKeys: Ref<string | undefined> = ref(undefined);
 function onKeySelected(keys: string[]) {
     selectedKeys.value = keys[0];
 }
+
+const selectedItem = computed(() => {
+    if (selectedKeys.value) {
+        return dataStore.fromString<Item>(selectedKeys.value)!;
+    }
+    return dataStore.root.getSubDir(props.partition!);
+});
+
+const selectedDir = computed(() => {
+    if (selectedItem.value instanceof File) {
+        return selectedItem.value.pos;
+    } else {
+        return selectedItem.value;
+    }
+});
 
 function handleSelect() {
     let select = dataStore.root.getSubDir(props.partition!);
@@ -315,7 +353,7 @@ const typeOptions: SelectOption[] = [
         value: 'Folder',
         label: () => {
             return h('div', { class: 'selectDiv' }, [
-                h(NIcon, { class: 'selectIcon' }, () => h(FolderOutline)),
+                h(NIcon, { class: 'selectIcon' }, () => h(FolderIcon)),
                 '目录',
             ]);
         },
@@ -323,7 +361,7 @@ const typeOptions: SelectOption[] = [
     {
         label: () => {
             return h('div', { class: 'selectDiv' }, [
-                h(NIcon, { class: 'selectIcon' }, () => h(DocumentTextOutline)),
+                h(NIcon, { class: 'selectIcon' }, () => h(DocumentIcon)),
                 '文档',
             ]);
         },
@@ -482,11 +520,36 @@ function handleRemove() {
     notification[succ === has_num ? 'success' : 'error']({
         title: '删除操作报告',
         content: `共尝试删除${has_num}个文件或文件夹，成功删除${succ}个，成功率${Math.round((has_num * 100) / succ)}%`,
-        duration: 3000,
+        duration: 2000,
         keepAliveOnHover: true,
     });
 }
-// 处理选择（终）
+
+// 处理移动、粘贴
+function handlePaste() {
+    let counts = 0;
+    treeCheckedKeys.value.forEach((v) => {
+        const copied = dataStore.copy(dataStore.fromString<Item>(v)!);
+        copied.pos = selectedDir.value;
+        selectedDir.value.sub.push(copied);
+        counts++;
+    });
+    notification.success({
+        title: '粘贴成功',
+        content: `共粘贴了${counts}个文件或文件夹`,
+        duration: 2000,
+        keepAliveOnHover: true,
+    });
+}
+function handleMove() {
+    handlePaste();
+    handleRemove();
+    notification.success({
+        title: '移动成功',
+        duration: 2000,
+        keepAliveOnHover: true,
+    });
+}
 </script>
 
 <style scoped>

@@ -33,7 +33,7 @@ import { MdEditor } from 'md-editor-v3';
 import 'md-editor-v3/lib/style.css';
 import { useFileSystemStore } from '../data/data.ts';
 import { NEmpty, NTabPane, NTabs } from 'naive-ui';
-import { useEmitter } from '../data/emitter.ts';
+import { useEmitter } from '../utils/emitter.ts';
 
 const dataStore = useFileSystemStore();
 const emitter = useEmitter();
@@ -70,6 +70,7 @@ onUnmounted(() => {
 
 function onTabClose(name: number) {
     dataStore.text.splice(name, 1);
+    if (tabValue.value === dataStore.text.length) tabValue.value -= 1;
 }
 
 emitter.on('documentAppend', (idx: number) => {

@@ -2,13 +2,26 @@ type Item = File | Folder;
 
 class Folder {
     name: string;
-    readonly pos: Folder | null;
     sub: Item[];
+    pos_path: string | null = null;
+    private pos_obj: Folder | null = null;
+
     constructor(name: string, pos: Folder | null) {
         this.name = name;
         this.pos = pos;
+        this.pos_path = pos?.toString() ?? null;
         this.sub = [];
     }
+
+    get pos(): Folder | null {
+        return this.pos_obj;
+    }
+
+    set pos(newValue: Folder | null) {
+        this.pos_path = newValue?.toString() ?? null;
+        this.pos_obj = newValue;
+    }
+
     newSubDir(name: string): Folder;
     newSubDir(name: string, type: 'Folder'): Folder;
     newSubDir(name: string, type: 'Document'): Document;
@@ -70,11 +83,24 @@ class Folder {
 
 class File {
     name: string;
-    readonly pos: Folder;
+    pos_path: string = '';
+    private pos_obj: Folder | null = null;
+
     constructor(name: string, pos: Folder) {
+        this.pos_path = pos?.toString() ?? null;
         this.name = name;
         this.pos = pos;
     }
+
+    get pos(): Folder {
+        return this.pos_obj!;
+    }
+
+    set pos(newValue: Folder) {
+        this.pos_path = newValue?.toString();
+        this.pos_obj = newValue;
+    }
+
     toString(): string {
         return this.pos.toString() + this.name;
     }

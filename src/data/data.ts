@@ -1,16 +1,17 @@
 import { defineStore } from 'pinia';
 import { type Ref, ref } from 'vue';
 import { Document, File, Folder, type Item } from './model.ts';
+import { TypeJson } from '../utils/typeJson.ts';
 
 export const useFileSystemStore = defineStore('FileSystem', () => {
     const text: Ref<Document[]> = ref([]);
 
-    const root = ref<Folder>(new Folder(':', null));
+    const root = ref(new Folder(':', null)) as Ref<Folder>;
     let currentPartition = ref('');
 
     function fromString<T>(path: string): T | null {
         const parts = path.split('/').filter(Boolean); // Split the path and remove empty strings
-        let current: Folder = root.value;
+        let current = root.value;
         const findFile = path[path.length - 1] !== '/';
 
         for (let i = 1, len = parts.length; i < len; i++) {
@@ -57,8 +58,15 @@ export const useFileSystemStore = defineStore('FileSystem', () => {
         return true;
     }
 
+    function copy<T extends Item>(item: T) {
+        const copied = TypeJson.copy<T>(item);
+        copied.pos = fromString(copied.pos_path!);
+        return copied;
+    }
+
     return {
         root,
+        copy,
         fromString,
         removeItem,
         text,

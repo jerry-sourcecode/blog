@@ -53,8 +53,17 @@ import Menu from './components/Menu.vue';
 import Editor from './components/Editor.vue';
 import { useFileSystemStore } from './data/data.ts';
 import { ref } from 'vue';
+import { TypeJson } from './utils/typeJson.ts';
+import { Document, File, Folder } from './data/model.ts';
 
 const dataStore = useFileSystemStore();
+
+TypeJson.register(Folder, 'Document', dataStore.root);
+TypeJson.register(File, 'Document', dataStore.root);
+TypeJson.register(Document, '', dataStore.root, '', '', '');
+TypeJson.setPropertyIgnore(Folder, 'pos_obj');
+TypeJson.setPropertyIgnore(File, 'pos_obj');
+TypeJson.setPropertyIgnore(Document, 'pos_obj');
 
 const FA = dataStore.root.subDir('A');
 const FB = dataStore.root.subDir('B');
