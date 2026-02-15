@@ -69,9 +69,13 @@ export const useFileSystemStore = defineStore('FileSystem', () => {
         return path[path.length - 1] === '/';
     }
 
-    watch(root, (value) => {
-        API.setData('root', TypeJson.stringify(value));
-    });
+    watch(
+        root,
+        (value) => {
+            API.setData('root', TypeJson.stringify(value));
+        },
+        { deep: true },
+    );
 
     return {
         root,

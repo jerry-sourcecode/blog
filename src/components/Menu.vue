@@ -512,12 +512,11 @@ async function onDetermine() {
             break;
         }
         case 'Document': {
-            (item as Document).title =
-                formValue.value.title === ''
-                    ? formValue.value.name
-                    : formValue.value.title;
+            (item as Document).title = formValue.value.title.emptyThen(
+                formValue.value.name,
+            );
             (item as Document).writer =
-                formValue.value.auth === '' ? '未知作者' : formValue.value.auth;
+                formValue.value.auth.emptyThen('未知作者');
             break;
         }
     }

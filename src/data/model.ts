@@ -1,4 +1,4 @@
-// type Item = File | Folder;
+import { useContentStore } from './content.ts';
 
 class Item {
     name: string;
@@ -54,8 +54,7 @@ class Folder extends Item {
         type: 'Document' | 'Folder' = 'Folder',
     ): Folder | Document {
         let k;
-        if (type === 'Document')
-            k = new Document(name, this, '未知作者', name, '');
+        if (type === 'Document') k = new Document(name, this, '未知作者', name);
         else k = new Folder(name, this);
         this.sub.push(k);
         return k;
@@ -138,22 +137,25 @@ class File extends Item {
 class Document extends File {
     writer: string;
     title: string;
-    content: string;
+    contentPointer: number;
     creationTime: Date;
     lastModifiedTime: Date;
-    constructor(
-        name: string,
-        pos: Folder,
-        writer: string,
-        title: string,
-        content: string,
-    ) {
+    constructor(name: string, pos: Folder, writer: string, title: string) {
+        const contentStore = useContentStore();
         super(name, pos);
         this.writer = writer;
         this.title = title;
-        this.content = content;
+        this.contentPointer = contentStore.getNewPosition();
         this.creationTime = new Date();
         this.lastModifiedTime = new Date();
+    }
+    get content() {
+        const contentStore = useContentStore();
+        return contentStore.get(this);
+    }
+    set content(content: string) {
+        const contentStore = useContentStore();
+        contentStore.set(this, content);
     }
     to_string(): string {
         return super.to_string() + '.doc';

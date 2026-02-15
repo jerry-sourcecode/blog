@@ -60,7 +60,7 @@ const dataStore = useFileSystemStore();
 
 TypeJson.register(Folder, 'Document', dataStore.root);
 TypeJson.register(File, 'Document', dataStore.root);
-TypeJson.register(Document, '', dataStore.root, '', '', '');
+TypeJson.register(Document, '', dataStore.root, '', '');
 TypeJson.setPropertyIgnore(Folder, 'pos_obj');
 TypeJson.setPropertyIgnore(File, 'pos_obj');
 TypeJson.setPropertyIgnore(Document, 'pos_obj');
@@ -71,7 +71,7 @@ const FB = dataStore.root.subDir('B');
 FA.subDir('B1', 'Document');
 FA.subDir('B1', 'Document');
 FA.subDir('B2', 'Document');
-FB.subDir('C').subDir('D').subDir('E', 'Document').content = '11223333';
+FB.subDir('C').subDir('D').subDir('E', 'Document');
 
 const partition = ref(0);
 
