@@ -1,7 +1,8 @@
 import { defineStore } from 'pinia';
-import { type Ref, ref } from 'vue';
+import { type Ref, ref, watch } from 'vue';
 import { Document, File, Folder, type Item } from './model.ts';
 import { TypeJson } from '../utils/typeJson.ts';
+import { API } from '../utils/api.ts';
 
 export const useFileSystemStore = defineStore('FileSystem', () => {
     const text: Ref<Document[]> = ref([]);
@@ -64,11 +65,20 @@ export const useFileSystemStore = defineStore('FileSystem', () => {
         return copied;
     }
 
+    function isFolder(path: string): boolean {
+        return path[path.length - 1] === '/';
+    }
+
+    watch(root, (value) => {
+        API.setData('root', TypeJson.stringify(value));
+    });
+
     return {
         root,
         copy,
         fromString,
         removeItem,
+        isFolder,
         text,
         currentPartition,
     };

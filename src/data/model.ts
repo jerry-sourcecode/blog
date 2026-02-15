@@ -54,7 +54,8 @@ class Folder extends Item {
         type: 'Document' | 'Folder' = 'Folder',
     ): Folder | Document {
         let k;
-        if (type === 'Document') k = new Document(name, this, '匿名', name, '');
+        if (type === 'Document')
+            k = new Document(name, this, '未知作者', name, '');
         else k = new Folder(name, this);
         this.sub.push(k);
         return k;

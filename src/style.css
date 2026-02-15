@@ -38,3 +38,7 @@ body {
     flex-direction: row;
     align-items: center;
 }
+
+.md-editor-code span{
+    font-family: "Consolas", "Courier New", "monospace" !important;
+}

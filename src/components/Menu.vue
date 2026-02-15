@@ -91,7 +91,7 @@
             <n-tooltip v-if="isChecking">
                 <template #trigger>
                     <n-button
-                        :disabled="treeCheckedKeys.length === 0"
+                        :disabled="treeRealCheckedKeys.size === 0"
                         class="icon"
                         text
                         @click="handleRemove"
@@ -99,12 +99,12 @@
                         <DeleteIcon />
                     </n-button>
                 </template>
-                删除所选{{ treeCheckedKeys.length }}个文件
+                删除所选{{ treeRealCheckedKeys.size }}个文件
             </n-tooltip>
             <n-tooltip v-if="isChecking">
                 <template #trigger>
                     <n-button
-                        :disabled="treeCheckedKeys.length === 0"
+                        :disabled="treeRealCheckedKeys.size === 0"
                         class="icon"
                         text
                         @click="handleMove"
@@ -112,14 +112,14 @@
                         <MoveIcon />
                     </n-button>
                 </template>
-                将所选{{ treeCheckedKeys.length }}个文件移动到
+                将所选{{ treeRealCheckedKeys.size }}个文件移动到
                 {{ selectedDir.name }}
                 <span v-if="selectedDir.isSystem()">分区</span>
             </n-tooltip>
             <n-tooltip v-if="isChecking">
                 <template #trigger>
                     <n-button
-                        :disabled="treeCheckedKeys.length === 0"
+                        :disabled="treeRealCheckedKeys.size === 0"
                         class="icon"
                         text
                         @click="handlePaste"
@@ -127,7 +127,7 @@
                         <PasteIcon />
                     </n-button>
                 </template>
-                将所选{{ treeCheckedKeys.length }}个文件粘贴到
+                将所选{{ treeRealCheckedKeys.size }}个文件粘贴到
                 {{ selectedDir.name }}
                 <span v-if="selectedDir.isSystem()">分区</span>
             </n-tooltip>
@@ -136,14 +136,19 @@
             ref="treeRef"
             v-model:checked-keys="treeCheckedKeys"
             v-model:expanded-keys="treeExpandedKeys"
+            :allow-drop="allowDrop"
             :checkable="isChecking"
             :data="data"
             :node-props="nodeProps"
             :render-label="renderLabel"
             :style="`height: ${treeHeight}; overflow-y: auto`"
             block-line
+            draggable
             expand-on-click
+            expand-on-dragenter
+            @drop="onNodeDrop"
             @update:selected-keys="onKeySelected"
+            @update-checked-keys="onKeyChecked"
         ></n-tree>
     </div>
 </template>
@@ -170,6 +175,7 @@ import {
 import {
     computed,
     h,
+    nextTick,
     onMounted,
     onUnmounted,
     type Ref,
@@ -190,6 +196,7 @@ import {
 } from '@remixicon/vue';
 import { useEmitter } from '../utils/emitter.ts';
 import TreeLabelPopover from './TreeLabelPopover.vue';
+import type { DropPosition } from 'naive-ui/es/tree/src/interface';
 
 const dataStore = useFileSystemStore();
 const emitter = useEmitter();
@@ -199,6 +206,22 @@ const treeRef: Ref<TreeInst | null> = ref(null);
 
 const props = defineProps({
     partition: String,
+});
+
+// 当前展开的节点
+const treeExpandedKeys: Ref<string[]> = ref([]);
+//当前被选中的节点
+const treeCheckedKeys: Ref<string[]> = ref([]);
+// 当前由于节点的父节点被选中，而被迫选中。为了防止重复计算，在遍历选中节点时应除去
+const treeForcedCheckedKeys: Ref<Set<string>> = ref(new Set());
+const treeRealCheckedKeys = computed(() => {
+    const ans: Set<string> = new Set();
+    treeCheckedKeys.value.forEach((v) => {
+        if (!treeForcedCheckedKeys.value.has(v)) {
+            ans.add(v);
+        }
+    });
+    return ans;
 });
 
 const convertFolderToTree = (root: Folder): TreeOption[] => {
@@ -216,6 +239,9 @@ const convertFolderToTree = (root: Folder): TreeOption[] => {
                 key: item.to_string(),
                 label: item.name,
                 prefix: () => h(NIcon, null, { default: () => h(FolderIcon) }),
+                checkboxDisabled: treeForcedCheckedKeys.value.has(
+                    item.to_string(),
+                ),
             };
 
             if (item.sub && item.sub.length > 0) {
@@ -234,6 +260,9 @@ const convertFolderToTree = (root: Folder): TreeOption[] => {
                 label: item.name,
                 prefix: () =>
                     h(NIcon, null, { default: () => h(DocumentIcon) }),
+                checkboxDisabled: treeForcedCheckedKeys.value.has(
+                    item.to_string(),
+                ),
             };
         }
     };
@@ -261,8 +290,15 @@ function nodeProps({ option }: { option: TreeOption }) {
             if (
                 dataStore.text.find((v) => v.to_string() === option.key) !==
                 undefined
-            )
+            ) {
+                emitter.emit(
+                    'documentAppend',
+                    dataStore.text.findIndex(
+                        (v) => v.to_string() === option.key,
+                    ),
+                );
                 return;
+            }
             if (!(option.key as string).endsWith('/') && !option.disabled) {
                 dataStore.text.push(
                     dataStore.fromString<Document>(
@@ -337,6 +373,7 @@ function rename(item: Item | 'Create', dir?: Folder): void {
     formValue.value.title = '';
     formValue.value.auth = '';
     formValue.value.isTypeFixed = item !== 'Create';
+    filenameSet.clear();
 
     hasAttu.value.name = true;
 
@@ -475,8 +512,12 @@ async function onDetermine() {
             break;
         }
         case 'Document': {
-            (item as Document).title = formValue.value.title;
-            (item as Document).writer = formValue.value.auth;
+            (item as Document).title =
+                formValue.value.title === ''
+                    ? formValue.value.name
+                    : formValue.value.title;
+            (item as Document).writer =
+                formValue.value.auth === '' ? '未知作者' : formValue.value.auth;
             break;
         }
     }
@@ -494,9 +535,6 @@ async function onDetermine() {
         }
     }
 }
-
-const treeExpandedKeys: Ref<string[]> = ref([]);
-const treeCheckedKeys: Ref<string[]> = ref([]);
 // 文件命名（终）-----------------------------
 
 // 处理滚动条
@@ -537,23 +575,19 @@ const notification = useNotification();
 function handleStartCheck() {
     isChecking.value = !isChecking.value;
     treeCheckedKeys.value = [];
+    treeForcedCheckedKeys.value.clear();
 }
 
-function handleRemove() {
-    const arr = treeRef.value?.getCheckedData();
-    if (arr?.keys.length === 0) {
-        notification.error({
-            title: '无法删除',
-            content: `没有选中文件，无法进行删除。`,
-            duration: 3000,
-            keepAliveOnHover: true,
-        });
-        return;
-    }
-    let succ = 0;
-    arr?.keys?.forEach((key) => {
+/**
+ * 从数据存储中移除指定的项。
+ * @param keys 要移除的项的键名数组
+ * @return 成功移除的项的数量
+ */
+function removeItems(keys: string[]): number {
+    let success = 0;
+    keys?.forEach((key) => {
         if (dataStore.removeItem(key as string)) {
-            succ++;
+            success++;
             // 处理删除
             if (selectedKeys.value === key) {
                 selectedKeys.value = undefined;
@@ -564,7 +598,7 @@ function handleRemove() {
                     1,
                 );
             }
-            if (treeCheckedKeys.value.find((v) => v === key)) {
+            if (treeRealCheckedKeys.value.has(key)) {
                 treeCheckedKeys.value.splice(
                     treeCheckedKeys.value.findIndex((v) => v === key),
                     1,
@@ -572,39 +606,62 @@ function handleRemove() {
             }
         }
     });
-    const has_num: number = arr?.keys.length!;
-    notification[succ === has_num ? 'success' : 'error']({
+    return success;
+}
+
+function handleRemove() {
+    const keys = Array.from(treeRealCheckedKeys.value);
+    if (keys.length === 0) {
+        notification.error({
+            title: '无法删除',
+            content: `没有选中文件，无法进行删除。`,
+            duration: 3000,
+            keepAliveOnHover: true,
+        });
+        return;
+    }
+    let success = removeItems(keys);
+    const has_num: number = keys.length!;
+    notification[success === has_num ? 'success' : 'error']({
         title: '删除操作报告',
-        content: `共尝试删除${has_num}个文件或文件夹，成功删除${succ}个，成功率${Math.round((has_num * 100) / succ)}%`,
+        content: `共尝试删除${has_num}个文件或文件夹，成功删除${success}个，成功率${Math.round((has_num * 100) / success)}%`,
         duration: 5000,
         keepAliveOnHover: true,
     });
 }
 
 // 处理移动、粘贴
-function handlePaste() {
-    let counts = 0,
-        success = 0,
-        fail_duplicateFile = 0, // 复制时重名
-        fail_copyToASubfolder = 0; // 尝试将父文件夹复制到子文件夹
-    let script = '';
-    treeCheckedKeys.value.forEach((v) => {
+function pasteItem(
+    keys: string[],
+    to: Folder,
+): { success: number; error: string } {
+    let error = '',
+        success = 0;
+    keys.forEach((v) => {
         const copied = dataStore.copy(dataStore.fromString<Item>(v)!);
-        counts++;
-        if (copied instanceof Folder && selectedDir.value.isORin(copied)) {
-            fail_copyToASubfolder++;
-            script += `${copied.name} 由于试图移动到其子文件夹而被阻止。\n`;
+        if (copied instanceof Folder && to.isORin(copied)) {
+            error += `${copied.name} 由于试图粘贴到其子文件夹而被阻止。\n`;
             return;
         }
-        copied.pos = selectedDir.value as Folder;
+        copied.pos = to as Folder;
         if (dataStore.fromString(copied.to_string()) !== null) {
-            script += `${copied.name} 由于与已有文件重名而被阻止。\n`;
-            fail_duplicateFile++;
+            error += `${copied.name} 由于与已有文件重名而被阻止。\n`;
             return;
         }
-        selectedDir.value.sub.push(copied);
+        to.sub.push(copied);
         success++;
     });
+    return {
+        success,
+        error,
+    };
+}
+function handlePaste() {
+    const { success, error } = pasteItem(
+        Array.from(treeRealCheckedKeys.value),
+        selectedDir.value,
+    );
+    const counts = treeRealCheckedKeys.value.size;
     if (counts === 0) {
         notification.error({
             title: '粘贴错误',
@@ -616,11 +673,12 @@ function handlePaste() {
     }
     notification[success === counts ? 'success' : 'error']({
         title: '粘贴操作完成',
-        content: `共粘贴了${counts}个文件或文件夹，其中成功了${success}个。\n${script}`,
+        content: `共粘贴了${counts}个文件或文件夹，其中成功了${success}个。\n${error}`,
         duration: 5000,
         keepAliveOnHover: true,
     });
     treeCheckedKeys.value = [];
+    treeForcedCheckedKeys.value.clear();
 }
 function handleMove() {
     handlePaste();
@@ -645,6 +703,94 @@ function renderLabel(info: { option: TreeOption }): VNodeChild {
             label: info.option.label,
             info: dataStore.fromString<Document>(info.option.key as string)!,
         });
+}
+
+function onKeyChecked(
+    _: Array<string | number>,
+    __: Array<TreeOption | null>,
+    meta: { node: TreeOption | null; action: 'check' | 'uncheck' },
+) {
+    const filepath = meta.node?.key as string;
+    let checked: string[] = [];
+    if (dataStore.isFolder(filepath)) {
+        checked = treeCheckedKeys.value;
+        if (meta.action === 'check') checked.push(filepath);
+        else checked.splice(checked.indexOf(filepath));
+        clearSubInCheckedList(
+            dataStore.fromString<Folder>(filepath)!,
+            meta.action,
+        );
+        nextTick(() => {
+            treeCheckedKeys.value = checked;
+        });
+    } else return;
+    function clearSubInCheckedList(
+        folder: Folder,
+        action: 'check' | 'uncheck',
+    ) {
+        folder.sub.forEach((item) => {
+            if (item instanceof Folder) {
+                clearSubInCheckedList(item, action);
+            }
+            const idx = checked.findIndex((v) => v === item.to_string());
+            if (action === 'check') {
+                if (idx === -1) {
+                    checked.push(item.to_string());
+                }
+            } else {
+                if (idx !== -1) {
+                    checked.splice(idx, 1);
+                }
+            }
+            if (action === 'check') {
+                treeForcedCheckedKeys.value.add(item.to_string());
+            } else {
+                treeForcedCheckedKeys.value.delete(item.to_string());
+            }
+        });
+    }
+}
+
+// DROP
+function allowDrop(info: {
+    dropPosition: DropPosition;
+    node: TreeOption;
+    phase: 'drag' | 'drop';
+}): boolean {
+    if (info.dropPosition !== 'inside') return false;
+    return dataStore.isFolder(info.node.key as string);
+}
+
+function onNodeDrop(data: {
+    node: TreeOption;
+    dragNode: TreeOption;
+    dropPosition: 'before' | 'inside' | 'after';
+}) {
+    if (data.dropPosition !== 'inside') return;
+    const to = data.node.key as string;
+    const from = data.dragNode.key as string;
+    const { success, error } = pasteItem(
+        [from],
+        dataStore.fromString<Folder>(to)!,
+    );
+    if (success === 0) {
+        notification.error({
+            title: '移动失败',
+            content: `${error}`,
+            duration: 5000,
+            keepAliveOnHover: true,
+        });
+        return;
+    }
+    const suc = removeItems([from]);
+    if (suc === 0) {
+        throw Error('拖拽移动尝试删除时找不到文件！');
+    }
+    notification.success({
+        title: '移动成功',
+        duration: 5000,
+        keepAliveOnHover: true,
+    });
 }
 </script>
 
