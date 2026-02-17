@@ -8,6 +8,7 @@ export const useEmitter = defineStore('signals', () => {
      */
     interface signalType {
         documentAppend: (idx: number) => void;
+        settingModalClose: () => void;
     }
 
     // 存储信号与回调函数的映射

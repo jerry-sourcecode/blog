@@ -214,7 +214,7 @@ class TypeJson {
                 return new Date(obj.value) as any;
             }
             const item = TypeJson.typeRegistry.get(tp)!;
-            result = new item.func!(item.param);
+            result = new item.func!(...item.param);
 
             // 获取类的属性元数据
             const classMetadata = propertyMetadata.get(item.func);

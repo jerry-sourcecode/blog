@@ -2,7 +2,6 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: ui-sans-serif,Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
 }
 
 body {
@@ -11,6 +10,7 @@ body {
     place-items: stretch;
     min-width: 320px;
     min-height: 100vh;
+    font-family: ui-sans-serif,Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
 }
 
 #app {
@@ -41,4 +41,8 @@ body {
 
 .md-editor-code span{
     font-family: "Consolas", "Courier New", "monospace" !important;
+}
+
+div.md-editor-preview .md-editor-code .md-editor-code-head{
+    z-index: 1000;
 }

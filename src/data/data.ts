@@ -3,6 +3,7 @@ import { type Ref, ref, watch } from 'vue';
 import { Document, File, Folder, type Item } from './model.ts';
 import { TypeJson } from '../utils/typeJson.ts';
 import { API } from '../utils/api.ts';
+import { useContentStore } from './content.ts';
 
 export const useFileSystemStore = defineStore('FileSystem', () => {
     const text: Ref<Document[]> = ref([]);
@@ -48,10 +49,23 @@ export const useFileSystemStore = defineStore('FileSystem', () => {
     }
 
     function removeItem(path: string): boolean {
+        const contentStore = useContentStore();
+        function clearPointer(fol: Folder) {
+            fol.sub.forEach((v) => {
+                if (v instanceof Document) {
+                    contentStore.del(v);
+                }
+            });
+        }
         const item = fromString<Item>(path);
         if (item == null) return false;
         const fa = item?.pos;
         if (!fa) return false;
+        if (item instanceof Folder) {
+            clearPointer(item);
+        } else if (item instanceof Document) {
+            contentStore.del(item);
+        }
         fa.sub.splice(
             fa.sub.findIndex((v) => v.to_string() === path),
             1,
@@ -72,7 +86,7 @@ export const useFileSystemStore = defineStore('FileSystem', () => {
     watch(
         root,
         (value) => {
-            API.setData('root', TypeJson.stringify(value));
+            API.setData('root', value);
         },
         { deep: true },
     );
