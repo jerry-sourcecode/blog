@@ -142,8 +142,6 @@ class Document extends File {
     lastModifiedTime: Date;
     // 用户是否正在编辑
     hasEdited: boolean;
-    // 用户在编辑器中编辑后但没有保存的内容
-    tmpContent: string;
     constructor(
         name: string,
         pos: Folder,
@@ -161,7 +159,6 @@ class Document extends File {
         this.creationTime = new Date();
         this.lastModifiedTime = new Date();
         this.hasEdited = false;
-        this.tmpContent = '';
     }
     get content() {
         const contentStore = useContentStore();

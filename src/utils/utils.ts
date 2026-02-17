@@ -1,4 +1,4 @@
-import { Document, Folder } from '../data/model.ts';
+import { Folder } from '../data/model.ts';
 import { useFileSystemStore } from '../data/data.ts';
 
 function formatDate(date: Date): string {
@@ -23,8 +23,6 @@ function recovery(fol: Folder) {
         item.pos = dataStore.fromString<Folder>(item.pos_path!);
         if (item instanceof Folder) {
             recovery(item);
-        } else if (item instanceof Document) {
-            item.tmpContent = item.content;
         }
     });
 }

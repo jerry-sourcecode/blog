@@ -96,7 +96,7 @@ function onSettingModalOpen() {
     contentStore.empty = API.getData('empty') ?? [];
     contentStore.contents = API.getData('contents') ?? [];
     if (API.getData('root') === null) {
-        dataStore.root.subDir('A');
+        dataStore.root.subDir('默认分区');
     } else {
         dataStore.root = API.getData('root');
     }

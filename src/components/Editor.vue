@@ -16,7 +16,8 @@
             <div :style="`height: ${editorHeight}`" class="editor-container">
                 <!-- 完整的编辑器 -->
                 <MdEditor
-                    v-model="dataStore.text[idx]!.tmpContent"
+                    ref="editorRef"
+                    v-model="tmpContents[idx]"
                     :autoFoldThreshold="100"
                     :footers="footers"
                     :toolbars="[
@@ -26,6 +27,7 @@
                         'table',
                         'mermaid',
                         '-',
+                        0,
                         'save',
                         '=',
                         'prettier',
@@ -41,6 +43,14 @@
                     @change="onChange(idx)"
                     @save="onSave(idx)"
                 >
+                    <template #defToolbars>
+                        <NormalToolbar title="搜索" @onClick="onSearch">
+                            <RiSearchLine
+                                class="md-editor-icon"
+                                style="fill: black"
+                            />
+                        </NormalToolbar>
+                    </template>
                     <template #defFooters>
                         <NormalFooterToolbar>
                             作者：{{ txt.writer }}
@@ -54,12 +64,19 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, onMounted, onUnmounted } from 'vue';
-import { MdEditor, type Footers, NormalFooterToolbar } from 'md-editor-v3';
+import { ref, onMounted, onUnmounted, type Ref } from 'vue';
+import {
+    MdEditor,
+    type Footers,
+    NormalFooterToolbar,
+    NormalToolbar,
+} from 'md-editor-v3';
 import 'md-editor-v3/lib/style.css';
 import { useFileSystemStore } from '../data/data.ts';
 import { NEmpty, NTabPane, NTabs } from 'naive-ui';
 import { useEmitter } from '../utils/emitter.ts';
+import { RiSearchLine } from '@remixicon/vue';
+import { openSearchPanel } from '@codemirror/search';
 
 const dataStore = useFileSystemStore();
 const emitter = useEmitter();
@@ -67,6 +84,8 @@ const emitter = useEmitter();
 const tabValue = ref(0);
 
 const editorHeight = ref('auto');
+const editorRef: Ref<(typeof MdEditor)[]> = ref([]);
+const tmpContents: Ref<string[]> = ref([]);
 
 // 计算编辑器高度
 const calculateHeight = () => {
@@ -96,11 +115,13 @@ onUnmounted(() => {
 
 function onTabClose(name: number) {
     dataStore.text.splice(name, 1);
+    tmpContents.value.splice(name, 1);
     if (tabValue.value === dataStore.text.length) tabValue.value -= 1;
 }
 
 emitter.on('documentAppend', (idx: number) => {
     tabValue.value = idx;
+    tmpContents.value.push(dataStore.text[idx]!.content);
 });
 
 function onChange(idx: number) {
@@ -108,11 +129,16 @@ function onChange(idx: number) {
 }
 
 function onSave(idx: number) {
-    dataStore.text[idx]!.hasEdited = false;
-    dataStore.text[idx]!.content = dataStore.text[idx]!.tmpContent;
+    const obj = dataStore.text[idx]!;
+    obj.hasEdited = false;
+    obj.content = tmpContents.value[idx]!;
 }
 
 const footers: Footers[] = ['markdownTotal', 0, '=', 'scrollSwitch'];
+
+function onSearch() {
+    openSearchPanel(editorRef.value[tabValue.value]!.getEditorView());
+}
 </script>
 
 <style>
