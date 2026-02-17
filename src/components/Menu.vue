@@ -133,7 +133,6 @@
             </n-tooltip>
         </div>
         <n-tree
-            ref="treeRef"
             v-model:checked-keys="treeCheckedKeys"
             v-model:expanded-keys="treeExpandedKeys"
             :allow-drop="allowDrop"
@@ -169,7 +168,6 @@ import {
     NSelect,
     type FormItemRule,
     type FormInst,
-    type TreeInst,
     useNotification,
 } from 'naive-ui';
 import {
@@ -202,7 +200,6 @@ const dataStore = useFileSystemStore();
 const emitter = useEmitter();
 
 const formRef: Ref<FormInst | null> = ref(null);
-const treeRef: Ref<TreeInst | null> = ref(null);
 
 const props = defineProps({
     partition: String,
