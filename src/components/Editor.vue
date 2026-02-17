@@ -37,7 +37,6 @@
                         'previewOnly',
                         'catalog',
                     ]"
-                    catalogLayout="flat"
                     class="markdown-editor"
                     previewTheme="github"
                     @change="onChange(idx)"
