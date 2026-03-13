@@ -101,5 +101,6 @@ function onSettingModalOpen() {
         dataStore.root = API.getData('root');
     }
     recovery(dataStore.root);
+    API.remoteInit();
 })();
 </script>

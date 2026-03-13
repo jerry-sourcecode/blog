@@ -7,7 +7,6 @@
             <h2>{{ info?.title }}</h2>
             <hr class="divide" />
             作者：{{ info?.writer }}<br />
-            最近更新于{{ formatDate(info?.lastModifiedTime!) }}
         </div>
     </n-popover>
 </template>
@@ -15,7 +14,6 @@
 <script lang="ts" setup>
 import { NPopover } from 'naive-ui';
 import { Document } from '../data/model.ts';
-import { formatDate } from '../utils/utils.ts';
 
 defineProps({
     label: {

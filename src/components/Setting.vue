@@ -14,7 +14,9 @@
             style="width: 200px"
         />
         <div class="setting-content">
-            <!-- 可切换的内容区域 -->
+            <div v-if="activeKey === 'account'" class="setting-panel">
+                <n-h1>账户设置</n-h1>
+            </div>
             <div v-if="activeKey === 'partition'" class="setting-panel">
                 <n-h1>分区设置</n-h1>
                 <n-dynamic-input
@@ -73,6 +75,10 @@ const dataStore = useFileSystemStore();
 const activeKey = ref('partition');
 
 const menuOptions: MenuOption[] = [
+    {
+        label: '用户',
+        key: 'account',
+    },
     {
         label: '分区',
         key: 'partition',

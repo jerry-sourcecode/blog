@@ -4,6 +4,7 @@ import { Document, File, Folder, type Item } from './model.ts';
 import { TypeJson } from '../utils/typeJson.ts';
 import { API } from '../utils/api.ts';
 import { useContentStore } from './content.ts';
+import { useEmitter } from '../utils/emitter.ts';
 
 export const useFileSystemStore = defineStore('FileSystem', () => {
     const text: Ref<Document[]> = ref([]);
@@ -70,6 +71,8 @@ export const useFileSystemStore = defineStore('FileSystem', () => {
             fa.sub.findIndex((v) => v.to_string() === path),
             1,
         );
+        const emitter = useEmitter();
+        emitter.emit('onItemDelete', item.id);
         return true;
     }
 

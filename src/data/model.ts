@@ -1,12 +1,15 @@
 import { useContentStore } from './content.ts';
+import { v4 as uuid } from 'uuid';
 
 class Item {
     name: string;
+    readonly id: string;
     pos_path: string | null = null;
     protected pos_obj: Folder | null = null;
 
     constructor() {
         this.name = '';
+        this.id = uuid();
     }
 
     get pos(): Folder | null {
@@ -138,8 +141,6 @@ class Document extends File {
     writer: string;
     title: string;
     contentPointer: number;
-    creationTime: Date;
-    lastModifiedTime: Date;
     // 用户是否正在编辑
     hasEdited: boolean;
     constructor(
@@ -156,8 +157,6 @@ class Document extends File {
         this.contentPointer = giveNewContentPointer
             ? contentStore.getNewPosition()
             : -1;
-        this.creationTime = new Date();
-        this.lastModifiedTime = new Date();
         this.hasEdited = false;
     }
     get content() {

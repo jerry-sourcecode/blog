@@ -489,7 +489,7 @@ async function onDetermine() {
         return;
     }
 
-    let item;
+    let item: Item;
     if (isCreate.value) {
         if (formValue.value.type === 'Folder') {
             item = (target.value as Folder).subDir(formValue.value.name);
@@ -500,7 +500,7 @@ async function onDetermine() {
             );
         }
     } else {
-        item = target.value;
+        item = target.value!;
     }
 
     item!.name = formValue.value.name;
@@ -529,6 +529,12 @@ async function onDetermine() {
             treeExpandedKeys.value.push(target.value!.to_string());
             target.value = target.value!.pos!;
         }
+    }
+
+    if (isCreate.value) {
+        emitter.emit('onItemAppend', item.to_string());
+    } else {
+        emitter.emit('onItemChange', item.id);
     }
 }
 // 文件命名（终）-----------------------------
