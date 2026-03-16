@@ -1,0 +1,101 @@
+/* 基础details样式 */
+details {
+    margin: 1em 0;
+    border-radius: 6px;
+    padding: 12px 15px;
+    background: #f8f9fa;
+    border-left: 4px solid #6c757d;
+}
+
+/* 隐藏默认标记并准备自定义标记 */
+details summary {
+    list-style: none;
+    cursor: pointer;
+    font-weight: 600;
+    position: relative;
+    padding-left: 1.8em;
+    line-height: 1.4;
+}
+
+/* 修复：垂直居中的自定义标记 */
+details summary::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-left: 6px solid;
+    border-top: 4px solid transparent;
+    border-bottom: 4px solid transparent;
+    transition: transform 0.2s ease;
+}
+
+/* 修复：展开时旋转标记并保持居中 */
+details[open] summary::before {
+    transform: translateY(-50%) rotate(90deg);
+}
+
+/* INFO 样式 */
+details.info {
+    background: #e8f4fd;
+    border-left-color: #2196F3;
+    color: #0c5460;
+}
+
+details.info summary {
+    color: #155724;
+}
+
+details.info summary::before {
+    border-left-color: #2196F3;
+}
+
+/* WARNING 样式 */
+details.warning {
+    background: #fff3cd;
+    border-left-color: #ff9800;
+    color: #856404;
+}
+
+details.warning summary {
+    color: #856404;
+}
+
+details.warning summary::before {
+    border-left-color: #ff9800;
+}
+
+/* ERROR 样式 */
+details.error {
+    background: #f8d7da;
+    border-left-color: #f44336;
+    color: #721c24;
+}
+
+details.error summary {
+    color: #721c24;
+}
+
+details.error summary::before {
+    border-left-color: #f44336;
+}
+
+/* 内容区域样式 */
+details .content {
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    details {
+        padding: 10px 12px;
+    }
+
+    details summary {
+        padding-left: 1.5em;
+    }
+}
