@@ -1,0 +1,407 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AIAssistantCustomInstructionsStorage">
+    <option name="instructions">
+      <map>
+        <entry key="AIAssistant.VCS.GenerateCommitMessage">
+          <value>
+            <AIAssistantStoredInstruction>
+              <option name="actionId" value="AIAssistant.VCS.GenerateCommitMessage" />
+              <option name="content" value="Avoid overly verbose descriptions or unnecessary details.&#10;&#10;使用简体中文回答&#10;&#10;使用 Conventional Commits 标准" />
+            </AIAssistantStoredInstruction>
+          </value>
+        </entry>
+        <entry key="AIAssistant.WriteDocumentation.JavaScript">
+          <value>
+            <AIAssistantStoredInstruction>
+              <option name="actionId" value="AIAssistant.WriteDocumentation.JavaScript" />
+              <option name="content" value="Do not return example code, do not use @author or @version or @since tags.&#10;DO NOT generate example usage.&#10;DO NOT generate usage example.&#10;DO NOT use html tags such as &lt;p&gt;, &lt;lu&gt;, &lt;li&gt;.&#10;DO NOT generate documentation for type member properties.&#10;Use Chinese.&#10;Write JSDoc in Typescript." />
+            </AIAssistantStoredInstruction>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="99b8d3b3-f2ef-4033-b6ff-6d76a602b93e" name="更改" comment="feat: 添加 Supabase 集成和事件发射器信号&#10;&#10;- 在 `src/utils` 中添加 `supabase.ts` 文件，集成 Supabase&#10;- 在 `src/utils/emitter.ts` 中添加新的信号 `onItemAppend`, `onItemDelete`, `onItemChange`, `onContentChange`, `onEmptyChange`&#10;- 在 `src/data/content.ts` 和 `src/data/data.ts` 中使用新的信号进行事件通知&#10;- 更新 `package.json` 和 `package-lock.json`，添加 `@supabase/supabase-js` 和 `uuid` 依赖&#10;- 移除 `public/vite.svg` 和 `index.html` 中的图标链接&#10;- 在 `.gitignore` 中添加 `.env` 文件以忽略环境变量文件&#10;- 更新 `src/components/TreeLabelPopover.vue`，移除最近更新时间的显示&#10;- 在 `src/App.vue` 中调用 `API.remoteInit` 初始化远程同步&#10;- 在 `src/utils/api.ts` 中添加 `remoteInit` 和 `remotePush` 方法，处理远程数据同步逻辑&#10;- 在 `src/components/Menu.vue` 和 `src/components/Setting.vue` 中更新相关逻辑，支持新的信号和功能">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.prettierrc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vscode/extensions.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Editor.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Menu.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Setting.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/TreeLabelPopover.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data/content.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data/data.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data/model.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/style.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/api.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/emitter.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/prototypeExtensions.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/supabase.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/typeJson.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/utils.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tsconfig.app.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tsconfig.node.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vite.config.ts" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="TypeScript File" />
+        <option value="Vue Composition API Component" />
+        <option value="CSS File" />
+        <option value="JavaScript File" />
+        <option value="Astro Component" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;jerry-sourcecode&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/jerry-sourcecode/blog.git&quot;,
+    &quot;accountId&quot;: &quot;38b894ac-967a-4a90-a770-2001e36a706a&quot;
+  }
+}</component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
+  <component name="ProjectId" id="38kCyIIMlTzRnxPL3M8CvC9if6d" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;dev&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;E:/code/front/Vue/blog&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_interpreter_path&quot;: &quot;node&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;npm.npm dev.executor&quot;: &quot;Run&quot;,
+    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;E:\\code\\front\\Vue\\blog\\node_modules\\prettier&quot;,
+    &quot;rearrange.code.on.save&quot;: &quot;true&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;E:\\code\\front\\Vue\\blog\\node_modules\\typescript\\lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;vue.recent.templates&quot;: [
+      &quot;Vue Composition API Component&quot;
+    ]
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\code\front\Vue\blog" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\code\front\Vue\blog\src\utils" />
+      <recent name="E:\code\front\Vue\blog\src" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="npm dev" type="js.build_tools.npm">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="dev" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-a71380e98a7c-JavaScript-WS-252.28539.21" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="默认任务">
+      <changelist id="99b8d3b3-f2ef-4033-b6ff-6d76a602b93e" name="更改" comment="" />
+      <created>1769334434477</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1769334434477</updated>
+      <workItem from="1769334435528" duration="2751000" />
+      <workItem from="1769836096698" duration="732000" />
+      <workItem from="1769838780241" duration="3426000" />
+      <workItem from="1769866661799" duration="2692000" />
+      <workItem from="1770270830379" duration="6562000" />
+      <workItem from="1770294746251" duration="5358000" />
+      <workItem from="1770304241359" duration="639000" />
+      <workItem from="1770345469918" duration="6440000" />
+      <workItem from="1770356688953" duration="1675000" />
+      <workItem from="1770361335296" duration="4942000" />
+      <workItem from="1770426876894" duration="2689000" />
+      <workItem from="1770448583215" duration="2190000" />
+      <workItem from="1770708765176" duration="5176000" />
+      <workItem from="1770717011574" duration="751000" />
+      <workItem from="1770793321320" duration="10881000" />
+      <workItem from="1770879800028" duration="6559000" />
+      <workItem from="1770966872633" duration="9022000" />
+      <workItem from="1771042309082" duration="25295000" />
+      <workItem from="1771120393733" duration="7051000" />
+      <workItem from="1771127673617" duration="3322000" />
+      <workItem from="1771133052127" duration="4123000" />
+      <workItem from="1771209878552" duration="22990000" />
+      <workItem from="1771290273469" duration="7420000" />
+      <workItem from="1771305427854" duration="489000" />
+      <workItem from="1771551522152" duration="2555000" />
+      <workItem from="1771809458071" duration="3537000" />
+      <workItem from="1773407442184" duration="925000" />
+      <workItem from="1773499540627" duration="563000" />
+      <workItem from="1773587951456" duration="815000" />
+      <workItem from="1773663721313" duration="3291000" />
+    </task>
+    <task id="LOCAL-00001" summary="feat: 增加编辑器和预览器，扩充功能&#10;&#10;- 添加 `v-md-editor` 及其相关依赖。用于编辑、修改md文件，增加代码高亮、代码复制、公式插件&#10;- 更新 `data.ts` 文件，添加 `isPreview` 和 `text` 状态&#10;- 更新 `vite.config.ts` 配置">
+      <option name="closed" value="true" />
+      <created>1770304829413</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1770304829413</updated>
+    </task>
+    <task id="LOCAL-00002" summary="feat: 增加编辑器和预览器，扩充功能&#10;&#10;- 添加 `v-md-editor` 及其相关依赖。用于编辑、修改md文件，增加代码高亮、代码复制、公式插件&#10;- 更新 `data.ts` 文件，添加 `isPreview` 和 `text` 状态&#10;- 更新 `vite.config.ts` 配置&#10;- 增加 `prettier`">
+      <option name="closed" value="true" />
+      <created>1770304857009</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1770304857009</updated>
+    </task>
+    <task id="LOCAL-00003" summary="feat: 增加文件系统和文档管理功能&#10;&#10;- 在 `data.ts` 中添加 `Document` 类型的 `text` 状态和 `currentPartition` 状态&#10;- 在 `model.ts` 中为 `Folder` 和 `File` 类添加 `filename` 方法&#10;- 更新 `App.vue` 以支持多标签页和文档管理&#10;- 更新 `Menu.vue` 以支持分区显示&#10;- 更新 `Editor.vue` 以支持编辑和预览模式切换">
+      <option name="closed" value="true" />
+      <created>1770355973354</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1770355973354</updated>
+    </task>
+    <task id="LOCAL-00004" summary="feat: 优化标签页和分区显示逻辑&#10;&#10;- 在 `App.vue` 中添加 `NTab` 组件并更新标签页切换逻辑&#10;- 更新 `Menu.vue` 以使用计算属性代替响应式引用&#10;- 将编辑器和预览器的多标签页功能移至 `Editor.vue`">
+      <option name="closed" value="true" />
+      <created>1770375298237</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1770375298237</updated>
+    </task>
+    <task id="LOCAL-00005" summary="refactor: 更新依赖并移除未使用的模块&#10;&#10;- 移除 `@kangc/v-md-editor` 及其相关依赖&#10;- 添加 `md-editor-v3` 作为新的 Markdown 编辑器&#10;- 移除 `data.ts` 中未使用的 `isPreview` 状态&#10;- 更新 `vite.config.ts` 和 `package.json` 的格式和依赖项">
+      <option name="closed" value="true" />
+      <created>1770377905409</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1770377905409</updated>
+    </task>
+    <task id="LOCAL-00006" summary="feat: 更新文件系统和文档管理功能&#10;&#10;- 在 `data.ts` 中更新 `fromString` 函数，支持泛型&#10;- 在 `model.ts` 中添加 `Document` 类型的支持&#10;- 在 `App.vue` 中更新示例数据的创建&#10;- 在 `Menu.vue` 中添加树节点图标和点击事件处理&#10;- 更新 `package.json` 和 `package-lock.json`，添加 `@vicons/ionicons5` 依赖">
+      <option name="closed" value="true" />
+      <created>1770431168235</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1770431168235</updated>
+    </task>
+    <task id="LOCAL-00007" summary="feat: 文件新建和重命名（设置属性）&#10;&#10;- 在 `model.ts` 中优化 `newSubDir`、`getSubDir` 和 `subDir` 方法的类型定义&#10;- 在 `Menu.vue` 中添加文件属性设置模态框和相关逻辑，完成新建文件和文件命名的功能&#10;- 在 `style.css` 中添加样式以支持文件属性设置界面">
+      <option name="closed" value="true" />
+      <created>1770807756483</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1770807756483</updated>
+    </task>
+    <task id="LOCAL-00008" summary="feat: 添加事件发射器和实现文件排序&#10;&#10;- 在 `data` 文件夹中添加 `emitter.ts`，实现信号发射器功能&#10;- 在 `data.ts` 中处理 Folder 的 filename 后缀为 / 的问题&#10;- 在 `model.ts` 中更新 `filename` 方法，使其返回值包含 /&#10;- 在 `Menu.vue` 和 `Editor.vue` 中使用新的事件发射器，并优化相关逻辑&#10;- 在打开新文件时，Tab会自动切换到新的文件窗口。在新添加文件时，对应的父文件夹会自动展开">
+      <option name="closed" value="true" />
+      <created>1770886849727</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1770886849727</updated>
+    </task>
+    <task id="LOCAL-00009" summary="feat: 添加文件删除功能和更新依赖&#10;&#10;- 在 `data.ts` 中添加 `removeItem` 方法，支持删除文件或文件夹&#10;- 在 `model.ts` 中添加 `isRoot` 和 `isSystem` 方法，用于判断文件或文件夹是否为根目录或系统目录&#10;- 更新 `Menu.vue` 以支持文件选择和删除操作，并优化树节点展开逻辑&#10;- 更新 `package.json` 和 `package-lock.json`，将 `@vicons/ionicons5` 替换为 `@remixicon/vue` 依赖&#10;- 在 `App.vue` 中添加 `NNotificationProvider` 组件，用于显示通知">
+      <option name="closed" value="true" />
+      <created>1770977210215</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1770977210215</updated>
+    </task>
+    <task id="LOCAL-00010" summary="feat: 添加文件复制和粘贴功能并优化代码结构&#10;&#10;- 在 `data.ts` 中添加 `copy` 方法，支持文件或文件夹的复制&#10;- 在 `model.ts` 中为 `Folder` 和 `File` 类添加 `pos_path` 属性，并更新 `pos` 的 getter 和 setter&#10;- 在 `Menu.vue` 中添加文件移动和粘贴功能，并优化树节点展开逻辑&#10;- 新增 `typeJson.ts` 文件，实现带有类型检查的 JSON 序列化和反序列化&#10;- 更新 `App.vue` 和 `Editor.vue` 中的导入路径以匹配新的文件结构">
+      <option name="closed" value="true" />
+      <created>1771055942400</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1771055942400</updated>
+    </task>
+    <task id="LOCAL-00011" summary="feat: 添加文件复制和粘贴功能并优化代码结构&#10;&#10;- 在 `data.ts` 中添加 `copy` 方法，支持文件或文件夹的复制&#10;- 在 `model.ts` 中为 `Folder` 和 `File` 类添加 `pos_path` 属性，并更新 `pos` 的 getter 和 setter&#10;- 在 `Menu.vue` 中添加文件移动和粘贴功能，并优化树节点展开逻辑&#10;- 新增 `typeJson.ts` 文件，实现带有类型检查的 JSON 序列化和反序列化&#10;- 更新 `App.vue` 和 `Editor.vue` 中的导入路径以匹配新的文件结构">
+      <option name="closed" value="true" />
+      <created>1771056575474</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1771056575474</updated>
+    </task>
+    <task id="LOCAL-00012" summary="feat: 优化文件系统和组件功能&#10;&#10;- 在 `data.ts` 中更新 `fromString` 函数，添加类型注解&#10;- 在 `model.ts` 中重构 `Item` 和 `Folder` 类，引入 `to_string` 方法，并移除 `toString` 方法。现在对 `Item` 类使用已过时的 `toString` 方法会报错。&#10;- 在 `Menu.vue` 中添加文件重命名功能，并优化按钮禁用逻辑&#10;- 新增 `TreeLabelPopover.vue` 组件，用于显示文件详细信息。现在可以通过hover来预览文件信息了&#10;- 在 `utils.ts` 中新增 `formatDate` 函数，用于格式化日期，以便在预览信息中展示。&#10;- 更新 `App.vue` 和 `style.css`，修改了字体。">
+      <option name="closed" value="true" />
+      <created>1771078409958</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1771078409958</updated>
+    </task>
+    <task id="LOCAL-00013" summary="feat: 增加文件拖拽移动功能并优化删除和粘贴逻辑&#10;&#10;- 在 `data.ts` 中添加 `watch` 监听 `root` 变化，并通过 `API` 保存数据&#10;- 在 `model.ts` 中更新 `newSubDir` 方法，将默认作者设置为“未知作者”&#10;- 在 `Menu.vue` 中添加文件拖拽移动功能，并优化删除和粘贴逻辑&#10;- 新增 `utils/api.ts` 文件，实现 `localStorage` 的封装&#10;- 更新 `style.css`，添加代码块样式">
+      <option name="closed" value="true" />
+      <created>1771133379171</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1771133379171</updated>
+    </task>
+    <task id="LOCAL-00014" summary="feat: 优化文件内容存储和字符串处理功能&#10;&#10;- 在 `data.ts` 中更新 `watch` 监听 `root` 变化，增加 `deep: true` 选项&#10;- 在 `model.ts` 中重构 `Document` 类，使用 `contentPointer` 替代 `content`，并添加 `get` 和 `set` 方法&#10;- 新增 `content.ts` 文件，实现内容存储管理&#10;- 在 `App.vue` 中移除 `Document` 的 `content` 参数，并更新示例数据&#10;- 在 `Menu.vue` 中使用 `emptyThen` 方法简化标题和作者设置&#10;- 新增 `prototypeExtensions.ts` 文件，扩展字符串和数字的原型方法">
+      <option name="closed" value="true" />
+      <created>1771159140306</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1771159140306</updated>
+    </task>
+    <task id="LOCAL-00015" summary="feat: 增加&quot;设置&quot;模态框和文档编辑与本地保存功能&#10;&#10;- 在 `App.vue` 中添加设置模态框，并更新按钮点击事件&#10;- 在 `Editor.vue` 中添加文档编辑状态和保存功能&#10;- 在 `model.ts` 中增加 `Document` 类的临时内容和编辑状态&#10;- 在 `content.ts` 和 `utils/api.ts` 中更新内容存储和恢复逻辑&#10;- 新增 `Setting.vue` 组件，实现分区设置功能&#10;- 更新 `emitter.ts`，添加关闭设置模态框的信号&#10;- 在 `data.ts` 中更新 `removeItem` 方法，处理文件夹删除时的内容清理&#10;- 优化 `typeJson.ts` 中的类型注册和序列化逻辑">
+      <option name="closed" value="true" />
+      <created>1771294877982</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1771294877982</updated>
+    </task>
+    <task id="LOCAL-00016" summary="refactor: 移除未使用的 tmpContent 字段并更新编辑器逻辑。实现了查找功能的GUI&#10;&#10;- 为了避免在每一次编辑器编辑时都需要运行 `setData`，在 `model.ts` 中移除 `Document` 类的 `tmpContent` 字段&#10;- 在 `utils.ts` 中移除对 `Document` 的引用&#10;- 在 `Editor.vue` 中更新编辑器逻辑，使用 `tmpContents` 管理临时内容。并添加了GUI用于调用查找功能&#10;- 在 `App.vue` 中将默认分区名称改为“默认分区”">
+      <option name="closed" value="true" />
+      <created>1771298093562</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1771298093562</updated>
+    </task>
+    <task id="LOCAL-00017" summary="refactor: 移除未使用的 tmpContent 字段并更新编辑器逻辑。实现了查找功能的GUI&#10;&#10;- 为了避免在每一次编辑器编辑时都需要运行 `setData`，在 `model.ts` 中移除 `Document` 类的 `tmpContent` 字段&#10;- 在 `utils.ts` 中移除对 `Document` 的引用&#10;- 在 `Editor.vue` 中更新编辑器逻辑，使用 `tmpContents` 管理临时内容。并添加了GUI用于调用查找功能&#10;- 在 `App.vue` 中将默认分区名称改为“默认分区”">
+      <option name="closed" value="true" />
+      <created>1771298115953</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1771298115953</updated>
+    </task>
+    <task id="LOCAL-00018" summary="refactor: 移除未使用的 treeRef 字段并更新导入&#10;&#10;- 在 `Menu.vue` 中移除未使用的 `treeRef` 字段&#10;- 更新导入，移除未使用的 `TreeInst` 类型">
+      <option name="closed" value="true" />
+      <created>1771298831797</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1771298831797</updated>
+    </task>
+    <task id="LOCAL-00019" summary="refactor: 将 catalogLayout 属性设置为 fixed&#10;考虑到目录会占据空间导致在大量文字下同样高度，显示文字差异较大">
+      <option name="closed" value="true" />
+      <created>1771304944126</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1771304944126</updated>
+    </task>
+    <task id="LOCAL-00020" summary="feat: 添加 Supabase 集成和事件发射器信号&#10;&#10;- 在 `src/utils` 中添加 `supabase.ts` 文件，集成 Supabase&#10;- 在 `src/utils/emitter.ts` 中添加新的信号 `onItemAppend`, `onItemDelete`, `onItemChange`, `onContentChange`, `onEmptyChange`&#10;- 在 `src/data/content.ts` 和 `src/data/data.ts` 中使用新的信号进行事件通知&#10;- 更新 `package.json` 和 `package-lock.json`，添加 `@supabase/supabase-js` 和 `uuid` 依赖&#10;- 移除 `public/vite.svg` 和 `index.html` 中的图标链接&#10;- 在 `.gitignore` 中添加 `.env` 文件以忽略环境变量文件&#10;- 更新 `src/components/TreeLabelPopover.vue`，移除最近更新时间的显示&#10;- 在 `src/App.vue` 中调用 `API.remoteInit` 初始化远程同步&#10;- 在 `src/utils/api.ts` 中添加 `remoteInit` 和 `remotePush` 方法，处理远程数据同步逻辑&#10;- 在 `src/components/Menu.vue` 和 `src/components/Setting.vue` 中更新相关逻辑，支持新的信号和功能">
+      <option name="closed" value="true" />
+      <created>1773407504006</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1773407504006</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="dev" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="feat: 增加编辑器和预览器，扩充功能&#10;&#10;- 添加 `v-md-editor` 及其相关依赖。用于编辑、修改md文件，增加代码高亮、代码复制、公式插件&#10;- 更新 `data.ts` 文件，添加 `isPreview` 和 `text` 状态&#10;- 更新 `vite.config.ts` 配置" />
+    <MESSAGE value="feat: 增加编辑器和预览器，扩充功能&#10;&#10;- 添加 `v-md-editor` 及其相关依赖。用于编辑、修改md文件，增加代码高亮、代码复制、公式插件&#10;- 更新 `data.ts` 文件，添加 `isPreview` 和 `text` 状态&#10;- 更新 `vite.config.ts` 配置&#10;- 增加 `prettier`" />
+    <MESSAGE value="feat: 增加文件系统和文档管理功能&#10;&#10;- 在 `data.ts` 中添加 `Document` 类型的 `text` 状态和 `currentPartition` 状态&#10;- 在 `model.ts` 中为 `Folder` 和 `File` 类添加 `filename` 方法&#10;- 更新 `App.vue` 以支持多标签页和文档管理&#10;- 更新 `Menu.vue` 以支持分区显示&#10;- 更新 `Editor.vue` 以支持编辑和预览模式切换" />
+    <MESSAGE value="feat: 优化标签页和分区显示逻辑&#10;&#10;- 在 `App.vue` 中添加 `NTab` 组件并更新标签页切换逻辑&#10;- 更新 `Menu.vue` 以使用计算属性代替响应式引用&#10;- 将编辑器和预览器的多标签页功能移至 `Editor.vue`" />
+    <MESSAGE value="refactor: 更新依赖并移除未使用的模块&#10;&#10;- 移除 `@kangc/v-md-editor` 及其相关依赖&#10;- 添加 `md-editor-v3` 作为新的 Markdown 编辑器&#10;- 移除 `data.ts` 中未使用的 `isPreview` 状态&#10;- 更新 `vite.config.ts` 和 `package.json` 的格式和依赖项" />
+    <MESSAGE value="feat: 更新文件系统和文档管理功能&#10;&#10;- 在 `data.ts` 中更新 `fromString` 函数，支持泛型&#10;- 在 `model.ts` 中添加 `Document` 类型的支持&#10;- 在 `App.vue` 中更新示例数据的创建&#10;- 在 `Menu.vue` 中添加树节点图标和点击事件处理&#10;- 更新 `package.json` 和 `package-lock.json`，添加 `@vicons/ionicons5` 依赖" />
+    <MESSAGE value="feat: 文件新建和重命名（设置属性）&#10;&#10;- 在 `model.ts` 中优化 `newSubDir`、`getSubDir` 和 `subDir` 方法的类型定义&#10;- 在 `Menu.vue` 中添加文件属性设置模态框和相关逻辑，完成新建文件和文件命名的功能&#10;- 在 `style.css` 中添加样式以支持文件属性设置界面" />
+    <MESSAGE value="feat: 添加事件发射器和实现文件排序&#10;&#10;- 在 `data` 文件夹中添加 `emitter.ts`，实现信号发射器功能&#10;- 在 `data.ts` 中处理 Folder 的 filename 后缀为 / 的问题&#10;- 在 `model.ts` 中更新 `filename` 方法，使其返回值包含 /&#10;- 在 `Menu.vue` 和 `Editor.vue` 中使用新的事件发射器，并优化相关逻辑&#10;- 在打开新文件时，Tab会自动切换到新的文件窗口。在新添加文件时，对应的父文件夹会自动展开" />
+    <MESSAGE value="feat: 添加文件删除功能和更新依赖&#10;&#10;- 在 `data.ts` 中添加 `removeItem` 方法，支持删除文件或文件夹&#10;- 在 `model.ts` 中添加 `isRoot` 和 `isSystem` 方法，用于判断文件或文件夹是否为根目录或系统目录&#10;- 更新 `Menu.vue` 以支持文件选择和删除操作，并优化树节点展开逻辑&#10;- 更新 `package.json` 和 `package-lock.json`，将 `@vicons/ionicons5` 替换为 `@remixicon/vue` 依赖&#10;- 在 `App.vue` 中添加 `NNotificationProvider` 组件，用于显示通知" />
+    <MESSAGE value="feat: 添加文件复制和粘贴功能并优化代码结构&#10;&#10;- 在 `data.ts` 中添加 `copy` 方法，支持文件或文件夹的复制&#10;- 在 `model.ts` 中为 `Folder` 和 `File` 类添加 `pos_path` 属性，并更新 `pos` 的 getter 和 setter&#10;- 在 `Menu.vue` 中添加文件移动和粘贴功能，并优化树节点展开逻辑&#10;- 新增 `typeJson.ts` 文件，实现带有类型检查的 JSON 序列化和反序列化&#10;- 更新 `App.vue` 和 `Editor.vue` 中的导入路径以匹配新的文件结构" />
+    <MESSAGE value="feat: 优化文件系统和组件功能&#10;&#10;- 在 `data.ts` 中更新 `fromString` 函数，添加类型注解&#10;- 在 `model.ts` 中重构 `Item` 和 `Folder` 类，引入 `to_string` 方法，并移除 `toString` 方法。现在对 `Item` 类使用已过时的 `toString` 方法会报错。&#10;- 在 `Menu.vue` 中添加文件重命名功能，并优化按钮禁用逻辑&#10;- 新增 `TreeLabelPopover.vue` 组件，用于显示文件详细信息。现在可以通过hover来预览文件信息了&#10;- 在 `utils.ts` 中新增 `formatDate` 函数，用于格式化日期，以便在预览信息中展示。&#10;- 更新 `App.vue` 和 `style.css`，修改了字体。" />
+    <MESSAGE value="feat: 增加文件拖拽移动功能并优化删除和粘贴逻辑&#10;&#10;- 在 `data.ts` 中添加 `watch` 监听 `root` 变化，并通过 `API` 保存数据&#10;- 在 `model.ts` 中更新 `newSubDir` 方法，将默认作者设置为“未知作者”&#10;- 在 `Menu.vue` 中添加文件拖拽移动功能，并优化删除和粘贴逻辑&#10;- 新增 `utils/api.ts` 文件，实现 `localStorage` 的封装&#10;- 更新 `style.css`，添加代码块样式" />
+    <MESSAGE value="feat: 优化文件内容存储和字符串处理功能&#10;&#10;- 在 `data.ts` 中更新 `watch` 监听 `root` 变化，增加 `deep: true` 选项&#10;- 在 `model.ts` 中重构 `Document` 类，使用 `contentPointer` 替代 `content`，并添加 `get` 和 `set` 方法&#10;- 新增 `content.ts` 文件，实现内容存储管理&#10;- 在 `App.vue` 中移除 `Document` 的 `content` 参数，并更新示例数据&#10;- 在 `Menu.vue` 中使用 `emptyThen` 方法简化标题和作者设置&#10;- 新增 `prototypeExtensions.ts` 文件，扩展字符串和数字的原型方法" />
+    <MESSAGE value="feat: 增加&quot;设置&quot;模态框和文档编辑与本地保存功能&#10;&#10;- 在 `App.vue` 中添加设置模态框，并更新按钮点击事件&#10;- 在 `Editor.vue` 中添加文档编辑状态和保存功能&#10;- 在 `model.ts` 中增加 `Document` 类的临时内容和编辑状态&#10;- 在 `content.ts` 和 `utils/api.ts` 中更新内容存储和恢复逻辑&#10;- 新增 `Setting.vue` 组件，实现分区设置功能&#10;- 更新 `emitter.ts`，添加关闭设置模态框的信号&#10;- 在 `data.ts` 中更新 `removeItem` 方法，处理文件夹删除时的内容清理&#10;- 优化 `typeJson.ts` 中的类型注册和序列化逻辑" />
+    <MESSAGE value="refactor: 移除未使用的 tmpContent 字段并更新编辑器逻辑。实现了查找功能的GUI&#10;&#10;- 为了避免在每一次编辑器编辑时都需要运行 `setData`，在 `model.ts` 中移除 `Document` 类的 `tmpContent` 字段&#10;- 在 `utils.ts` 中移除对 `Document` 的引用&#10;- 在 `Editor.vue` 中更新编辑器逻辑，使用 `tmpContents` 管理临时内容。并添加了GUI用于调用查找功能&#10;- 在 `App.vue` 中将默认分区名称改为“默认分区”" />
+    <MESSAGE value="refactor: 移除未使用的 treeRef 字段并更新导入&#10;&#10;- 在 `Menu.vue` 中移除未使用的 `treeRef` 字段&#10;- 更新导入，移除未使用的 `TreeInst` 类型" />
+    <MESSAGE value="refactor: 将 catalogLayout 属性设置为 fixed&#10;考虑到目录会占据空间导致在大量文字下同样高度，显示文字差异较大" />
+    <MESSAGE value="feat: 添加 Supabase 集成和事件发射器信号&#10;&#10;- 在 `src/utils` 中添加 `supabase.ts` 文件，集成 Supabase&#10;- 在 `src/utils/emitter.ts` 中添加新的信号 `onItemAppend`, `onItemDelete`, `onItemChange`, `onContentChange`, `onEmptyChange`&#10;- 在 `src/data/content.ts` 和 `src/data/data.ts` 中使用新的信号进行事件通知&#10;- 更新 `package.json` 和 `package-lock.json`，添加 `@supabase/supabase-js` 和 `uuid` 依赖&#10;- 移除 `public/vite.svg` 和 `index.html` 中的图标链接&#10;- 在 `.gitignore` 中添加 `.env` 文件以忽略环境变量文件&#10;- 更新 `src/components/TreeLabelPopover.vue`，移除最近更新时间的显示&#10;- 在 `src/App.vue` 中调用 `API.remoteInit` 初始化远程同步&#10;- 在 `src/utils/api.ts` 中添加 `remoteInit` 和 `remotePush` 方法，处理远程数据同步逻辑&#10;- 在 `src/components/Menu.vue` 和 `src/components/Setting.vue` 中更新相关逻辑，支持新的信号和功能" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: 添加 Supabase 集成和事件发射器信号&#10;&#10;- 在 `src/utils` 中添加 `supabase.ts` 文件，集成 Supabase&#10;- 在 `src/utils/emitter.ts` 中添加新的信号 `onItemAppend`, `onItemDelete`, `onItemChange`, `onContentChange`, `onEmptyChange`&#10;- 在 `src/data/content.ts` 和 `src/data/data.ts` 中使用新的信号进行事件通知&#10;- 更新 `package.json` 和 `package-lock.json`，添加 `@supabase/supabase-js` 和 `uuid` 依赖&#10;- 移除 `public/vite.svg` 和 `index.html` 中的图标链接&#10;- 在 `.gitignore` 中添加 `.env` 文件以忽略环境变量文件&#10;- 更新 `src/components/TreeLabelPopover.vue`，移除最近更新时间的显示&#10;- 在 `src/App.vue` 中调用 `API.remoteInit` 初始化远程同步&#10;- 在 `src/utils/api.ts` 中添加 `remoteInit` 和 `remotePush` 方法，处理远程数据同步逻辑&#10;- 在 `src/components/Menu.vue` 和 `src/components/Setting.vue` 中更新相关逻辑，支持新的信号和功能" />
+  </component>
+</project>
