@@ -26,23 +26,33 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="99b8d3b3-f2ef-4033-b6ff-6d76a602b93e" name="更改" comment="删除所有项目文件和配置&#10;项目转型为静态博客，使用Astro+pure主题">
-      <change beforePath="$PROJECT_DIR$/packages/pure/components/pages/Copyright.astro" beforeDir="false" afterPath="$PROJECT_DIR$/packages/pure/components/pages/Copyright.astro" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/blog/3d-rendering/index.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/blog/3d-rendering/nikola-arsov-still-life-interior-design-vray-3ds-max-05-930px.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/blog/3d-rendering/thanos-dd-single-image-004a.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/blog/3d-rendering/thumbnail.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/blog/draft.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/blog/improve-concentration/index.mdx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/blog/improve-concentration/thumbnail.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/blog/markdown-zh/index.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/blog/markdown-zh/thumbnail.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/blog/markdown/index.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/blog/markdown/thumbnail.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/blog/music-journey/index.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/blog/music-journey/thumbnail.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/blog/using-mdx.mdx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/docs/index.astro" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/docs/index.astro" afterDir="false" />
+    <list default="true" id="99b8d3b3-f2ef-4033-b6ff-6d76a602b93e" name="更改" comment="fix: add @unocss/astro dependency for Vercel build">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bun.lock" beforeDir="false" afterPath="$PROJECT_DIR$/bun.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/avatar.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/avatar.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/blog/.obsidian/app.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/blog/.obsidian/app.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/blog/.obsidian/appearance.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/blog/.obsidian/appearance.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/blog/.obsidian/core-plugins.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/blog/.obsidian/core-plugins.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/blog/.obsidian/workspace.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/blog/.obsidian/workspace.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/blog/数论与图论/6. 割点和割边.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/blog/数论与图论/6. 割点和割边.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/docs/advanced/about.mdx" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/docs/advanced/about.mdx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/docs/advanced/customize.mdx" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/docs/advanced/customize.mdx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/docs/advanced/faq.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/docs/advanced/faq.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/docs/advanced/optimize.mdx" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/docs/advanced/optimize.mdx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/docs/advanced/update.mdx" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/docs/advanced/update.mdx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/docs/integrations/advanced.mdx" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/docs/integrations/advanced.mdx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/docs/integrations/comment.mdx" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/docs/integrations/comment.mdx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/docs/integrations/components.mdx" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/docs/integrations/components.mdx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/docs/integrations/content-present.mdx" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/docs/integrations/content-present.mdx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/docs/integrations/links.mdx" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/docs/integrations/links.mdx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/docs/integrations/others.mdx" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/docs/integrations/others.mdx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/docs/integrations/unocss.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/docs/integrations/unocss.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/docs/setup/configuration.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/docs/setup/configuration.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/docs/setup/content.mdx" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/docs/setup/content.mdx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/docs/setup/deployment.mdx" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/docs/setup/deployment.mdx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/docs/setup/getting-started.mdx" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/docs/setup/getting-started.mdx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/blog/[...page].astro" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/blog/[...page].astro" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/docs/[...id].astro" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/docs/[...id].astro" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/index.astro" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/index.astro" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/site.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/site.config.ts" afterDir="false" />
     </list>
@@ -95,7 +105,7 @@
     &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;dev&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
     &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;E:/code/front/Vue/blog&quot;,
     &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
@@ -184,6 +194,7 @@
       <workItem from="1773499540627" duration="563000" />
       <workItem from="1773587951456" duration="815000" />
       <workItem from="1773663721313" duration="6516000" />
+      <workItem from="1773842489585" duration="4495000" />
     </task>
     <task id="LOCAL-00001" summary="feat: 增加编辑器和预览器，扩充功能&#10;&#10;- 添加 `v-md-editor` 及其相关依赖。用于编辑、修改md文件，增加代码高亮、代码复制、公式插件&#10;- 更新 `data.ts` 文件，添加 `isPreview` 和 `text` 状态&#10;- 更新 `vite.config.ts` 配置">
       <option name="closed" value="true" />
@@ -370,7 +381,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="dev" />
+                        <option value="master" />
                       </list>
                     </value>
                   </entry>

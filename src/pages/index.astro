@@ -85,7 +85,7 @@ if (!images[imagePath])
       <!--</Section>-->
       {
         allPostsByDate.length > 0 && (
-          <Section title='Posts'>
+          <Section title='帖子'>
             <ul class='flex flex-col gap-y-1.5 sm:gap-y-2'>
               {allPostsByDate.map((p) => (
                 <li class='flex flex-col gap-x-2 sm:flex-row'>
@@ -93,7 +93,7 @@ if (!images[imagePath])
                 </li>
               ))}
             </ul>
-            <Button title='More posts' class='w-fit self-end' href='/blog' variant='ahead' />
+            <Button title='查看更多' class='w-fit self-end' href='/blog' variant='ahead' />
           </Section>
         )
       }
@@ -147,7 +147,7 @@ if (!images[imagePath])
       <!--  </Card>-->
       <!--</Section>-->
 
-      <Section title='Website List'>
+      <Section title='网页'>
         <div class='grid grid-cols-1 gap-3 sm:grid-cols-2'>
           <ProjectCard
             href='https://worder.jerrylab.top'
@@ -168,10 +168,10 @@ if (!images[imagePath])
       <!--  />-->
       <!--</Section>-->
 
-      <Section title='Skills'>
-        <SkillLayout title='Languages' skills={languages} />
-        <SkillLayout title='Frontend' skills={frontend} />
-        <SkillLayout title='Backend' skills={backend} />
+      <Section title='技能'>
+        <SkillLayout title='语言' skills={languages} />
+        <SkillLayout title='前端' skills={frontend} />
+        <SkillLayout title='后端' skills={backend} />
       </Section>
     </div>
     <Quote class='mt-12' />

@@ -1,47 +1,47 @@
 ---
-title: 'Configuration'
-description: 'Configuration files'
+title: '配置'
+description: '配置文件'
 order: 4
 ---
 
-## Theme Configuration
+## 主题配置
 
-File: `src/site.config.ts`
+文件：`src/site.config.ts`
 
-pending update...
+待更新...
 
-## Astro Configuration
+## Astro 配置
 
-File: `astro.config.ts`
+文件：`astro.config.ts`
 
-You can configure it to change deployment methods, add rehype & remark plugins, and more.
+你可以配置它以更改部署方式、添加 rehype 和 remark 插件等。
 
-Read more about Astro configuration [here](https://docs.astro.build/en/guides/configuring-astro/).
+了解更多关于 Astro 配置的信息 [点击这里](https://docs.astro.build/zh-cn/guides/configuring-astro/)。
 
-## ESLint Configuration
+## ESLint 配置
 
-File: `eslint.config.mjs`
+文件：`eslint.config.mjs`
 
-You can configure ESLint to change rules and security checks.
+你可以配置 ESLint 以更改规则和安全检查。
 
-Read more about ESLint configuration [here](https://eslint.org/docs/latest/use/configure/configuration-files).
+了解更多关于 ESLint 配置的信息 [点击这里](https://eslint.org/docs/latest/use/configure/configuration-files)。
 
-## Prettier Configuration
+## Prettier 配置
 
-File: `prettier.config.mjs`
+文件：`prettier.config.mjs`
 
-You can configure Prettier to change code formatting rules, this can change your experience using package command `format` and extension support for your favorite IDE.
+你可以配置 Prettier 以更改代码格式化规则，这会影响使用包命令 `format` 的体验以及你喜欢的 IDE 的扩展支持。
 
-Options are available [here](https://prettier.io/docs/en/options).
+可用选项参见 [这里](https://prettier.io/docs/en/options)。
 
-## UnoCSS Configuration
+## UnoCSS 配置
 
-File: `uno.config.ts`
+文件：`uno.config.ts`
 
-It is a utility-first CSS framework building custom designs. Theme also uses its preset `typography` to make type settings.
+它是一个用于构建自定义设计的原子化 CSS 框架。主题也使用其预设 `typography` 来进行排版设置。
 
-Checkout [UnoCSS & Styles ](/docs/integrations/unocss) for more info.
+查看 [UnoCSS 与样式](/docs/integrations/unocss) 了解更多信息。
 
-## Typescript Configuration
+## TypeScript 配置
 
-File: `tsconfig.json`
+文件：`tsconfig.json`

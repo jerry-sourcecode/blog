@@ -21,16 +21,14 @@ export const theme: ThemeUserConfig = {
   /** Specify the default language for this site. */
   // 指定此站点的默认语言。
   locale: {
-    // lang: 'en-US',
-    lang: 'zh-CN',
-    // attrs: 'en_US',
-    attrs: 'zh_CN',
+    lang: 'en-US',
+    attrs: 'en_US',
     // Date locale
     // 日期区域设置
-    dateLocale: 'en-US',
+    dateLocale: 'zh-cn',
     dateOptions: {
       day: 'numeric',
-      month: 'short',
+      month: 'numeric',
       year: 'numeric'
     }
   },
@@ -63,8 +61,8 @@ export const theme: ThemeUserConfig = {
   // 配置您站点的页眉。
   header: {
     menu: [
-      { title: 'Blog', link: '/blog' },
-      { title: 'Docs', link: '/docs' },
+      { title: '博客', link: '/blog' },
+      { title: '文档', link: '/docs' },
       // { title: 'Projects', link: '/projects' },
       // { title: 'Links', link: '/links' },
       // { title: 'About', link: '/about' }

@@ -1,18 +1,18 @@
 ---
-title: 'Content Presentation'
-description: 'About Content Page Rendering'
+title: '内容呈现'
+description: '关于内容页面渲染'
 order: 5
 ---
 
 import { MdxRepl } from 'astro-pure/user'
 
-## Shiki Code
+## Shiki 代码
 
-You can change transformer at `defineConfig.markdown.shikiConfig` in config file `astro.config.ts`.
+你可以在配置文件 `astro.config.ts` 的 `defineConfig.markdown.shikiConfig` 中更改转换器。
 
-### Basic Usage
+### 基本用法
 
-For `.astro` file:
+对于 `.astro` 文件：
 
 ```astro
 ---
@@ -22,7 +22,7 @@ import { Code } from 'astro:components'
 <Code lang='shell' code={`git log --oneline`} />
 ```
 
-For `.mdx` and `.md` file:
+对于 `.mdx` 和 `.md` 文件：
 
 ````markdown
 ```shell
@@ -30,136 +30,136 @@ git log --oneline
 ```
 ````
 
-### Add Title
+### 添加标题
 
 <MdxRepl width='80%'>
-```shell title="start.sh"
-#!/bin/bash
+  ```shell title="start.sh"
+  #!/bin/bash
 
-bun check &
-bun dev
-```
+  bun check &
+  bun dev
+  ```
 
-<Fragment slot='desc'>
-````markdown
-```shell title="start.sh"
-#!/bin/bash
+  <Fragment slot='desc'>
+    ````markdown
+    ```shell title="start.sh"
+    #!/bin/bash
 
-bun check &
-bun dev
-```
-````
-</Fragment>
+    bun check &
+    bun dev
+    ```
+    ````
+  </Fragment>
 </MdxRepl>
 
-### Show Diff
+### 显示差异
 
-Supports add and del lines.
+支持添加和删除行。
 
 <MdxRepl width='80%'>
-```shell title="deploy.sh"
-#!/bin/bash
+  ```shell title="deploy.sh"
+  #!/bin/bash
 
-bun check
-bun lint
-bun format # [!code ++]
-# No need for vercel or other ci/cd
-bun run build # [!code --]
-git push
-```
+  bun check
+  bun lint
+  bun format # [!code ++]
+  # 不需要 vercel 或其他 ci/cd
+  bun run build # [!code --]
+  git push
+  ```
 
-<Fragment slot='desc'>
-````markdown
-```shell title="deploy.sh"
-#!/bin/bash
+  <Fragment slot='desc'>
+    ````markdown
+    ```shell title="deploy.sh"
+    #!/bin/bash
 
-bun check
-bun lint
-bun format # [\!code ++]
-# No need for vercel or other ci/cd
-bun run build # [\!code --]
-git push
-```
-````
-</Fragment>
+    bun check
+    bun lint
+    bun format # [\!code ++]
+    # 不需要 vercel 或其他 ci/cd
+    bun run build # [\!code --]
+    git push
+    ```
+    ````
+  </Fragment>
 </MdxRepl>
 
-### Show Highlight
+### 显示高亮
 
 <MdxRepl width='80%'>
-```html
-<!doctype html><html><head><meta name="color-scheme" content="dark"></head><body style='overflow:hidden'> 
-<!-- Highlight a single line -->
+  ```html
+  <!doctype html><html><head><meta name="color-scheme" content="dark"></head><body style='overflow:hidden'>
+<!-- 高亮单行 -->
 <p style='text-align:center'>君指先跃动の光は、私の一生不変の信仰に、唯私の超电磁炮永生き！</p> <!-- [!code highlight] -->
 
-<!-- You can also highlight multiple lines with a single comment: -->
-<canvas id="can" width="400" height="400" style="background:Black;display:block;margin:20px auto;"></canvas> 
+<!-- 你也可以用单个注释高亮多行： -->
+<canvas id="can" width="400" height="400" style="background:Black;display:block;margin:20px auto;"></canvas>
 <script> // [!code highlight:11]
-var sn=[42,41], dz=43, fx=1, n, score=-1, ctx=document.getElementById("can").getContext("2d"), sz=20;
-onkeydown = e => fx = sn[1]-sn[0]==(n=[-1,-20,1,20][(e||event).keyCode-37]||fx) ? fx : n;
-function draw(t,c) { ctx.fillStyle=c; ctx.fillRect(t%sz*sz+1,~~(t/sz)*sz+1,sz-2,sz-2); }
-!function() { sn.unshift(n=sn[0]+fx);
-  if (sn.indexOf(n,1)>0||n<0||n>399||fx==1&&n%sz==0||fx==-1&&n%sz==sz-1) return alert("GAME OVER. Score: "+score);
-  draw(n,"Lime");
-  if (n==dz) { score++; do{dz=~~(Math.random()*400)}while(sn.indexOf(dz)>=0); draw(dz,"Yellow"); }
-  else draw(sn.pop(),"Black");
-  setTimeout(arguments.callee,130);
-}(); </script> 
-</body></html> 
-```
+  var sn=[42,41], dz=43, fx=1, n, score=-1, ctx=document.getElementById("can").getContext("2d"), sz=20;
+  onkeydown = e => fx = sn[1]-sn[0]==(n=[-1,-20,1,20][(e||event).keyCode-37]||fx) ? fx : n;
+  function draw(t,c) { ctx.fillStyle=c; ctx.fillRect(t%sz*sz+1,~~(t/sz)*sz+1,sz-2,sz-2); }
+  !function() { sn.unshift(n=sn[0]+fx);
+    if (sn.indexOf(n,1)>0||n<0||n>399||fx==1&&n%sz==0||fx==-1&&n%sz==sz-1) return alert("游戏结束。得分: "+score);
+    draw(n,"Lime");
+    if (n==dz) { score++; do{dz=~~(Math.random()*400)}while(sn.indexOf(dz)>=0); draw(dz,"Yellow"); }
+    else draw(sn.pop(),"Black");
+    setTimeout(arguments.callee,130);
+  }(); </script>
+</body></html>
+  ```
 
-<Fragment slot='desc'>
-````markdown
-```html
-<!doctype html><html><head><meta name="color-scheme" content="dark"></head><body style='overflow:hidden'> 
-<!-- Highlight a single line -->
-<p style='text-align:center'>君指先跃动の光は、私の一生不変の信仰に、唯私の超电磁炮永生き！</p> <!-- [\!code highlight] -->
+  <Fragment slot='desc'>
+    ````markdown
+    ```html
+    <!doctype html><html><head><meta name="color-scheme" content="dark"></head><body style='overflow:hidden'>
+  <!-- 高亮单行 -->
+  <p style='text-align:center'>君指先跃动の光は、私の一生不変の信仰に、唯私の超电磁炮永生き！</p> <!-- [\!code highlight] -->
 
-<!-- You can also highlight multiple lines with a single comment: -->
-<canvas id="can" width="400" height="400" style="background:Black;display:block;margin:20px auto;"></canvas> 
-<script> // [\!code highlight:11]
-var sn=[42,41], dz=43, fx=1, n, score=-1, ctx=document.getElementById("can").getContext("2d"), sz=20;
-onkeydown = e => fx = sn[1]-sn[0]==(n=[-1,-20,1,20][(e||event).keyCode-37]||fx) ? fx : n;
-function draw(t,c) { ctx.fillStyle=c; ctx.fillRect(t%sz*sz+1,~~(t/sz)*sz+1,sz-2,sz-2); }
-!function() { sn.unshift(n=sn[0]+fx);
-  if (sn.indexOf(n,1)>0||n<0||n>399||fx==1&&n%sz==0||fx==-1&&n%sz==sz-1) return alert("GAME OVER. Score: "+score);
-  draw(n,"Lime");
-  if (n==dz) { score++; do{dz=~~(Math.random()*400)}while(sn.indexOf(dz)>=0); draw(dz,"Yellow"); }
-  else draw(sn.pop(),"Black");
-  setTimeout(arguments.callee,130);
-}(); </script> 
-</body></html> 
-```
-````
-</Fragment>
+  <!-- 你也可以用单个注释高亮多行： -->
+  <canvas id="can" width="400" height="400" style="background:Black;display:block;margin:20px auto;"></canvas>
+  <script> // [\!code highlight:11]
+    var sn=[42,41], dz=43, fx=1, n, score=-1, ctx=document.getElementById("can").getContext("2d"), sz=20;
+    onkeydown = e => fx = sn[1]-sn[0]==(n=[-1,-20,1,20][(e||event).keyCode-37]||fx) ? fx : n;
+    function draw(t,c) { ctx.fillStyle=c; ctx.fillRect(t%sz*sz+1,~~(t/sz)*sz+1,sz-2,sz-2); }
+    !function() { sn.unshift(n=sn[0]+fx);
+      if (sn.indexOf(n,1)>0||n<0||n>399||fx==1&&n%sz==0||fx==-1&&n%sz==sz-1) return alert("游戏结束。得分: "+score);
+      draw(n,"Lime");
+      if (n==dz) { score++; do{dz=~~(Math.random()*400)}while(sn.indexOf(dz)>=0); draw(dz,"Yellow"); }
+      else draw(sn.pop(),"Black");
+      setTimeout(arguments.callee,130);
+    }(); </script>
+  </body></html>
+    ```
+    ````
+  </Fragment>
 </MdxRepl>
 
-## Content Obsolete Warning
+## 内容过期警告
 
-Add a warning message if the article is old enough.
+如果文章足够旧，添加一条警告信息。
 
 ```astro title="src/layouts/BlogPost.astro"
 ---
 // ...
 ---
-  <Hero {data} {remarkPluginFrontmatter} slot='header'>
-    <Fragment slot='description'>
-      {!isDraft && enableComment && <PageInfo comment class='mt-1' />}
-      { // [!code ++]
-        Math.floor((Date.now() - new Date(articleDate).getTime()) / 86400000) > 365 && ( // [!code ++]
-          <p class='mt-1 text-sm italic text-primary' style='--primary:41 90% 50%'> <!-- [!code ++] -->
-            This article was last updated over a year ago. Some information may be outdated. <!-- [!code ++] -->
-          </p> /* [!code ++] */
-        ) // [!code ++]
-      } <!-- [!code ++] -->
-    </Fragment>
-  </Hero>
+<Hero {data} {remarkPluginFrontmatter} slot='header'>
+  <Fragment slot='description'>
+    {!isDraft && enableComment && <PageInfo comment class='mt-1' />}
+    {
+      Math.floor((Date.now() - new Date(articleDate).getTime()) / 86400000) > 365 && (
+        <p class='mt-1 text-sm italic text-primary' style='--primary:41 90% 50%'>
+          本文最后更新于一年前。部分信息可能已过时。
+        </p>
+      )
+    }
+  </Fragment>
+</Hero>
 ```
 
-It will render like this:
+渲染效果如下：
 
 {
-  <p class='mt-1 text-sm italic text-primary' style='--primary:41 90% 50%'>
-    This article was last updated over a year ago. Some information may be outdated.
-  </p>
+<p class='mt-1 text-sm italic text-primary' style='--primary:41 90% 50%'>
+  本文最后更新于一年前。部分信息可能已过时。
+</p>
 }

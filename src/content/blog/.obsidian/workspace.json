@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "数论与图论/6. 割点和割边.md",
+                "file": "数论与图论/2. 最短路.md",
                 "mode": "source",
                 "source": true
               },
               "icon": "lucide-file",
-              "title": "6. 割点和割边"
+              "title": "2. 最短路"
             }
           }
         ]
@@ -112,12 +112,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "数论与图论/6. 割点和割边.md",
+                "file": "数论与图论/2. 最短路.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "6. 割点和割边 的出链列表"
+              "title": "2. 最短路 的出链列表"
             }
           },
           {
@@ -184,6 +184,7 @@
   },
   "active": "ae18ab5fecdb7ac5",
   "lastOpenFiles": [
+    "数论与图论/6. 割点和割边.md",
     "数论与图论/5. 强连通分量.md",
     "字符串/KMP算法.md",
     "字符串/字符串哈希.md",
@@ -194,7 +195,6 @@
     "数数/3. 树形DP.md",
     "数数/2. 动态规划.md",
     "数数/1. 组合数学.md",
-    "数论与图论/6. 割点和割边.md",
     "数据结构/2. 线段树.md",
     "0. 导论.md",
     "未命名.base",
