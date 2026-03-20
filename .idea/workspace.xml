@@ -26,35 +26,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="99b8d3b3-f2ef-4033-b6ff-6d76a602b93e" name="更改" comment="fix: add @unocss/astro dependency for Vercel build">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bun.lock" beforeDir="false" afterPath="$PROJECT_DIR$/bun.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/avatar.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/avatar.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/blog/.obsidian/app.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/blog/.obsidian/app.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/blog/.obsidian/appearance.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/blog/.obsidian/appearance.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/blog/.obsidian/core-plugins.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/blog/.obsidian/core-plugins.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/blog/.obsidian/workspace.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/blog/.obsidian/workspace.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/blog/数论与图论/6. 割点和割边.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/blog/数论与图论/6. 割点和割边.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/docs/advanced/about.mdx" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/docs/advanced/about.mdx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/docs/advanced/customize.mdx" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/docs/advanced/customize.mdx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/docs/advanced/faq.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/docs/advanced/faq.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/docs/advanced/optimize.mdx" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/docs/advanced/optimize.mdx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/docs/advanced/update.mdx" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/docs/advanced/update.mdx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/docs/integrations/advanced.mdx" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/docs/integrations/advanced.mdx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/docs/integrations/comment.mdx" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/docs/integrations/comment.mdx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/docs/integrations/components.mdx" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/docs/integrations/components.mdx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/docs/integrations/content-present.mdx" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/docs/integrations/content-present.mdx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/docs/integrations/links.mdx" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/docs/integrations/links.mdx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/docs/integrations/others.mdx" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/docs/integrations/others.mdx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/docs/integrations/unocss.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/docs/integrations/unocss.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/docs/setup/configuration.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/docs/setup/configuration.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/docs/setup/content.mdx" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/docs/setup/content.mdx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/docs/setup/deployment.mdx" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/docs/setup/deployment.mdx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/docs/setup/getting-started.mdx" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/docs/setup/getting-started.mdx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/blog/[...page].astro" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/blog/[...page].astro" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/docs/[...id].astro" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/docs/[...id].astro" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/index.astro" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/index.astro" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/site.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/site.config.ts" afterDir="false" />
+    <list default="true" id="99b8d3b3-f2ef-4033-b6ff-6d76a602b93e" name="更改" comment="docs:优化和更新文档内容&#10;&#10;- 将文档标题和描述翻译为中文&#10;- 更新文档中的代码示例和说明&#10;- 调整部分组件和配置的路径及名称&#10;- 更新评论系统相关配置和使用说明&#10;- 魔改系统，删除不需要的冗余元素">
+      <change beforePath="$PROJECT_DIR$/src/pages/clipboard/index.astro" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/clipboard/index.astro" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,11 +37,11 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="TypeScript File" />
-        <option value="Vue Composition API Component" />
         <option value="CSS File" />
         <option value="JavaScript File" />
+        <option value="TypeScript File" />
         <option value="Astro Component" />
+        <option value="Vue Composition API Component" />
       </list>
     </option>
   </component>
@@ -118,7 +91,7 @@
     &quot;npm.npm dev.executor&quot;: &quot;Run&quot;,
     &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;E:\\code\\front\\Vue\\blog\\node_modules\\prettier&quot;,
     &quot;rearrange.code.on.save&quot;: &quot;true&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;settings.javascript.prettier&quot;,
     &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
     &quot;ts.external.directory.path&quot;: &quot;E:\\code\\front\\Vue\\blog\\node_modules\\typescript\\lib&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
@@ -134,8 +107,8 @@
       <recent name="E:\code\front\Vue\blog" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="E:\code\front\Vue\blog\src\utils" />
       <recent name="E:\code\front\Vue\blog\src" />
+      <recent name="E:\code\front\Vue\blog\src\utils" />
     </key>
   </component>
   <component name="RunManager">
@@ -194,7 +167,10 @@
       <workItem from="1773499540627" duration="563000" />
       <workItem from="1773587951456" duration="815000" />
       <workItem from="1773663721313" duration="6516000" />
-      <workItem from="1773842489585" duration="4495000" />
+      <workItem from="1773842489585" duration="4834000" />
+      <workItem from="1773923312083" duration="1477000" />
+      <workItem from="1774005358806" duration="3062000" />
+      <workItem from="1774012035634" duration="456000" />
     </task>
     <task id="LOCAL-00001" summary="feat: 增加编辑器和预览器，扩充功能&#10;&#10;- 添加 `v-md-editor` 及其相关依赖。用于编辑、修改md文件，增加代码高亮、代码复制、公式插件&#10;- 更新 `data.ts` 文件，添加 `isPreview` 和 `text` 状态&#10;- 更新 `vite.config.ts` 配置">
       <option name="closed" value="true" />
@@ -364,7 +340,15 @@
       <option name="project" value="LOCAL" />
       <updated>1773668873093</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="docs:优化和更新文档内容&#10;&#10;- 将文档标题和描述翻译为中文&#10;- 更新文档中的代码示例和说明&#10;- 调整部分组件和配置的路径及名称&#10;- 更新评论系统相关配置和使用说明&#10;- 魔改系统，删除不需要的冗余元素">
+      <option name="closed" value="true" />
+      <created>1773847931365</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1773847931365</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -415,6 +399,8 @@
     <MESSAGE value="删除项目文件和配置&#10;&#10;- 删除 `.gitignore`, `.prettierrc`, `src/utils/api.ts`, `src/App.vue`, `src/data/content.ts`, `src/data/data" />
     <MESSAGE value="删除项目文件和配置&#10;&#10;- 删除 `.gitignore`, `.prettierrc`, `src/utils/api.ts`, `src/App.vue`, `src/data/content.ts`, `src/data/data.ts`, `src/components/Editor.vue`, `src/utils/emitter.ts`, `.vscode/extensions.json`, `index.html`, `src/main.ts`, `src/components/Menu.vue` 文件&#10;- 移除所有相关代码和配置" />
     <MESSAGE value="删除所有项目文件和配置&#10;项目转型为静态博客，使用Astro+pure主题" />
-    <option name="LAST_COMMIT_MESSAGE" value="删除所有项目文件和配置&#10;项目转型为静态博客，使用Astro+pure主题" />
+    <MESSAGE value="fix: add @unocss/astro dependency for Vercel build" />
+    <MESSAGE value="docs:优化和更新文档内容&#10;&#10;- 将文档标题和描述翻译为中文&#10;- 更新文档中的代码示例和说明&#10;- 调整部分组件和配置的路径及名称&#10;- 更新评论系统相关配置和使用说明&#10;- 魔改系统，删除不需要的冗余元素" />
+    <option name="LAST_COMMIT_MESSAGE" value="docs:优化和更新文档内容&#10;&#10;- 将文档标题和描述翻译为中文&#10;- 更新文档中的代码示例和说明&#10;- 调整部分组件和配置的路径及名称&#10;- 更新评论系统相关配置和使用说明&#10;- 魔改系统，删除不需要的冗余元素" />
   </component>
 </project>

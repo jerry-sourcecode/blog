@@ -63,6 +63,7 @@ export const theme: ThemeUserConfig = {
     menu: [
       { title: '博客', link: '/blog' },
       { title: '文档', link: '/docs' },
+      { title: '云剪切板', link: '/clipboard' },
       // { title: 'Projects', link: '/projects' },
       // { title: 'Links', link: '/links' },
       // { title: 'About', link: '/about' }
