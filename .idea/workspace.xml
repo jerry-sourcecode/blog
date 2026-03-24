@@ -26,9 +26,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="99b8d3b3-f2ef-4033-b6ff-6d76a602b93e" name="更改" comment="docs:优化和更新文档内容&#10;&#10;- 将文档标题和描述翻译为中文&#10;- 更新文档中的代码示例和说明&#10;- 调整部分组件和配置的路径及名称&#10;- 更新评论系统相关配置和使用说明&#10;- 魔改系统，删除不需要的冗余元素">
-      <change beforePath="$PROJECT_DIR$/src/pages/clipboard/index.astro" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/clipboard/index.astro" afterDir="false" />
-    </list>
+    <list default="true" id="99b8d3b3-f2ef-4033-b6ff-6d76a602b93e" name="更改" comment="删除云剪切板功能及相关组件&#10;&#10;- 删除 `src/pages/clipboard/index.astro` 页面&#10;- 删除 `src/components/clipboard/input.astro` 和 `src/components/clipboard/textarea.astro` 组件&#10;- 从 `src/site.config.ts` 中移除云剪切板链接" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -78,7 +76,7 @@
     &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;dev&quot;,
     &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;E:/code/front/Vue/blog&quot;,
     &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
@@ -171,6 +169,9 @@
       <workItem from="1773923312083" duration="1477000" />
       <workItem from="1774005358806" duration="3062000" />
       <workItem from="1774012035634" duration="456000" />
+      <workItem from="1774153194466" duration="86000" />
+      <workItem from="1774170320476" duration="19000" />
+      <workItem from="1774365945381" duration="259000" />
     </task>
     <task id="LOCAL-00001" summary="feat: 增加编辑器和预览器，扩充功能&#10;&#10;- 添加 `v-md-editor` 及其相关依赖。用于编辑、修改md文件，增加代码高亮、代码复制、公式插件&#10;- 更新 `data.ts` 文件，添加 `isPreview` 和 `text` 状态&#10;- 更新 `vite.config.ts` 配置">
       <option name="closed" value="true" />
@@ -348,7 +349,15 @@
       <option name="project" value="LOCAL" />
       <updated>1773847931365</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="删除云剪切板功能及相关组件&#10;&#10;- 删除 `src/pages/clipboard/index.astro` 页面&#10;- 删除 `src/components/clipboard/input.astro` 和 `src/components/clipboard/textarea.astro` 组件&#10;- 从 `src/site.config.ts` 中移除云剪切板链接">
+      <option name="closed" value="true" />
+      <created>1774366202180</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1774366202180</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -401,6 +410,7 @@
     <MESSAGE value="删除所有项目文件和配置&#10;项目转型为静态博客，使用Astro+pure主题" />
     <MESSAGE value="fix: add @unocss/astro dependency for Vercel build" />
     <MESSAGE value="docs:优化和更新文档内容&#10;&#10;- 将文档标题和描述翻译为中文&#10;- 更新文档中的代码示例和说明&#10;- 调整部分组件和配置的路径及名称&#10;- 更新评论系统相关配置和使用说明&#10;- 魔改系统，删除不需要的冗余元素" />
-    <option name="LAST_COMMIT_MESSAGE" value="docs:优化和更新文档内容&#10;&#10;- 将文档标题和描述翻译为中文&#10;- 更新文档中的代码示例和说明&#10;- 调整部分组件和配置的路径及名称&#10;- 更新评论系统相关配置和使用说明&#10;- 魔改系统，删除不需要的冗余元素" />
+    <MESSAGE value="删除云剪切板功能及相关组件&#10;&#10;- 删除 `src/pages/clipboard/index.astro` 页面&#10;- 删除 `src/components/clipboard/input.astro` 和 `src/components/clipboard/textarea.astro` 组件&#10;- 从 `src/site.config.ts` 中移除云剪切板链接" />
+    <option name="LAST_COMMIT_MESSAGE" value="删除云剪切板功能及相关组件&#10;&#10;- 删除 `src/pages/clipboard/index.astro` 页面&#10;- 删除 `src/components/clipboard/input.astro` 和 `src/components/clipboard/textarea.astro` 组件&#10;- 从 `src/site.config.ts` 中移除云剪切板链接" />
   </component>
 </project>

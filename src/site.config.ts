@@ -5,7 +5,7 @@ export const theme: ThemeUserConfig = {
   // 基础
   /** Title for your website. Will be used in metadata and as browser tab title. */
   // 您网站的标题。将用于元数据和浏览器标签标题。
-  title: 'Jerry\'s Blog',
+  title: "Jerry's Blog",
   /** Will be used in index page & copyright declaration */
   // 将用于首页和版权声明
   author: 'Jerry',
@@ -62,8 +62,7 @@ export const theme: ThemeUserConfig = {
   header: {
     menu: [
       { title: '博客', link: '/blog' },
-      { title: '文档', link: '/docs' },
-      { title: '云剪切板', link: '/clipboard' },
+      { title: '文档', link: '/docs' }
       // { title: 'Projects', link: '/projects' },
       // { title: 'Links', link: '/links' },
       // { title: 'About', link: '/about' }
@@ -136,7 +135,7 @@ export const integ: IntegrationUserConfig = {
     // 您自己的链接信息
     applyTip: [
       { name: 'Name', val: theme.title },
-      { name: 'Desc', val: theme.description || 'Null' },
+      { name: 'Desc', val: theme.description || 'Null' }
     ],
     // Cache avatars in `public/avatars/` to improve user experience.
     // 缓存头像在`public/avatars/`中以改善用户体验。
