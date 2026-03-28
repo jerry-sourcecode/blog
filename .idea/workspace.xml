@@ -26,7 +26,31 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="99b8d3b3-f2ef-4033-b6ff-6d76a602b93e" name="更改" comment="删除云剪切板功能及相关组件&#10;&#10;- 删除 `src/pages/clipboard/index.astro` 页面&#10;- 删除 `src/components/clipboard/input.astro` 和 `src/components/clipboard/textarea.astro` 组件&#10;- 从 `src/site.config.ts` 中移除云剪切板链接" />
+    <list default="true" id="99b8d3b3-f2ef-4033-b6ff-6d76a602b93e" name="更改" comment="删除云剪切板功能及相关组件&#10;&#10;- 删除 `src/pages/clipboard/index.astro` 页面&#10;- 删除 `src/components/clipboard/input.astro` 和 `src/components/clipboard/textarea.astro` 组件&#10;- 从 `src/site.config.ts` 中移除云剪切板链接">
+      <change beforePath="$PROJECT_DIR$/astro.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/astro.config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bun.lock" beforeDir="false" afterPath="$PROJECT_DIR$/bun.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/content.config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/blog/.obsidian/workspace.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/blog/.obsidian/workspace.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/blog/字符串/KMP算法.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/blog/字符串/KMP算法.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/blog/字符串/字符串哈希.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/blog/字符串/字符串哈希.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/blog/思想/1. Meet in the middle.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/blog/思想/1. Meet in the middle.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/blog/数学/1. 取模与逆元.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/blog/数学/1. 取模与逆元.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/blog/数据结构/1. 并查集.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/blog/数据结构/1. 并查集.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/blog/数据结构/2. 线段树.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/blog/数据结构/2. 线段树.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/blog/数据结构/3. 堆与平衡树.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/blog/数据结构/3. 堆与平衡树.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/blog/数数/1. 组合数学.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/blog/数数/1. 组合数学.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/blog/数数/2. 动态规划.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/blog/数数/2. 动态规划.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/blog/数数/3. 树形DP.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/blog/数数/3. 树形DP.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/blog/数论与图论/1. 图的储存.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/blog/数论与图论/1. 图的储存.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/blog/数论与图论/2. 最短路.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/blog/数论与图论/2. 最短路.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/blog/数论与图论/3. 最近公共祖先.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/blog/数论与图论/3. 最近公共祖先.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/blog/数论与图论/4. 最小生成树.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/blog/数论与图论/4. 最小生成树.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/blog/数论与图论/5. 强连通分量.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/blog/数论与图论/5. 强连通分量.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/blog/数论与图论/6. 割点和割边.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/blog/数论与图论/6. 割点和割边.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/blog/杂项/1. 技巧.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/blog/杂项/1. 技巧.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/blog/[...id].astro" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/blog/[...id].astro" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -45,6 +69,7 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="HARD" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
@@ -58,6 +83,10 @@
     &quot;accountId&quot;: &quot;38b894ac-967a-4a90-a770-2001e36a706a&quot;
   }
 }</component>
+  <component name="McpProjectServerCommands">
+    <commands />
+    <urls />
+  </component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
@@ -69,37 +98,37 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;dev&quot;,
-    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;E:/code/front/Vue/blog&quot;,
-    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_interpreter_path&quot;: &quot;node&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;npm.npm dev.executor&quot;: &quot;Run&quot;,
-    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;E:\\code\\front\\Vue\\blog\\node_modules\\prettier&quot;,
-    &quot;rearrange.code.on.save&quot;: &quot;true&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;settings.javascript.prettier&quot;,
-    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;E:\\code\\front\\Vue\\blog\\node_modules\\typescript\\lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
+    "git-widget-placeholder": "master",
+    "junie.onboarding.icon.badge.shown": "true",
+    "last_opened_file_path": "E:/code/front/Vue/blog",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_interpreter_path": "node",
+    "nodejs_package_manager_path": "npm",
+    "npm.npm dev.executor": "Run",
+    "prettierjs.PrettierConfiguration.Package": "E:\\code\\front\\Vue\\blog\\node_modules\\prettier",
+    "rearrange.code.on.save": "true",
+    "settings.editor.selected.configurable": "settings.javascript.prettier",
+    "to.speed.mode.migration.done": "true",
+    "ts.external.directory.path": "E:\\code\\front\\Vue\\blog\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;vue.recent.templates&quot;: [
-      &quot;Vue Composition API Component&quot;
+  "keyToStringList": {
+    "vue.recent.templates": [
+      "Vue Composition API Component"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\code\front\Vue\blog" />

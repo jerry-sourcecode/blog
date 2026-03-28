@@ -3,6 +3,7 @@ import vercel from '@astrojs/vercel'
 import AstroPureIntegration from 'astro-pure'
 import { defineConfig, fontProviders } from 'astro/config'
 import rehypeKatex from 'rehype-katex'
+import rehypeMermaid from 'rehype-mermaid'
 import remarkMath from 'remark-math'
 
 // Local integrations
@@ -25,7 +26,7 @@ import config from './src/site.config.ts'
 // https://astro.build/config
 export default defineConfig({
   // [Basic]
-  site: 'https://astro-pure.js.org',
+  site: 'https://blog.jerrylab.top',
   // Deploy to a sub path
   // https://astro-pure.js.org/docs/setup/deployment#platform-with-base-path
   // base: '/astro-pure/',
@@ -56,9 +57,14 @@ export default defineConfig({
 
   // [Markdown]
   markdown: {
+    syntaxHighlight: {
+      type: 'shiki',
+      excludeLangs: ['mermaid']
+    },
     remarkPlugins: [remarkMath],
     rehypePlugins: [
       [rehypeKatex, {}],
+      [rehypeMermaid, {}],
       rehypeHeadingIds,
       [
         rehypeAutolinkHeadings,

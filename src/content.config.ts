@@ -1,5 +1,5 @@
-import { glob } from 'astro/loaders'
 import { defineCollection, z } from 'astro:content'
+import { glob } from 'astro/loaders'
 
 function removeDupsAndLowerCase(array: string[]) {
   if (!array.length) return array
@@ -36,7 +36,10 @@ const blog = defineCollection({
       language: z.string().optional(),
       draft: z.boolean().default(false),
       // Special fields
-      comment: z.boolean().default(true)
+      comment: z.boolean().default(true),
+      // 自定义
+      // 映射路径
+      slug: z.string().optional()
     })
 })
 
@@ -52,7 +55,9 @@ const docs = defineCollection({
       tags: z.array(z.string()).default([]).transform(removeDupsAndLowerCase),
       draft: z.boolean().default(false),
       // Special fields
-      order: z.number().default(999)
+      order: z.number().default(999),
+      // 映射路径
+      slug: z.string().optional()
     })
 })
 
