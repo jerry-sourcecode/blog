@@ -1,0 +1,7 @@
+{
+  "buildCommand": "bun run build",
+  "installCommand": "bun install && npx playwright install --with-deps chromium",
+  "env": {
+    "PLAYWRIGHT_BROWSERS_PATH": "/vercel/.cache/playwright"
+  }
+}

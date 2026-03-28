@@ -26,30 +26,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="99b8d3b3-f2ef-4033-b6ff-6d76a602b93e" name="更改" comment="删除云剪切板功能及相关组件&#10;&#10;- 删除 `src/pages/clipboard/index.astro` 页面&#10;- 删除 `src/components/clipboard/input.astro` 和 `src/components/clipboard/textarea.astro` 组件&#10;- 从 `src/site.config.ts` 中移除云剪切板链接">
-      <change beforePath="$PROJECT_DIR$/astro.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/astro.config.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bun.lock" beforeDir="false" afterPath="$PROJECT_DIR$/bun.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/content.config.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/blog/.obsidian/workspace.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/blog/.obsidian/workspace.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/blog/字符串/KMP算法.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/blog/字符串/KMP算法.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/blog/字符串/字符串哈希.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/blog/字符串/字符串哈希.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/blog/思想/1. Meet in the middle.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/blog/思想/1. Meet in the middle.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/blog/数学/1. 取模与逆元.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/blog/数学/1. 取模与逆元.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/blog/数据结构/1. 并查集.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/blog/数据结构/1. 并查集.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/blog/数据结构/2. 线段树.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/blog/数据结构/2. 线段树.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/blog/数据结构/3. 堆与平衡树.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/blog/数据结构/3. 堆与平衡树.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/blog/数数/1. 组合数学.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/blog/数数/1. 组合数学.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/blog/数数/2. 动态规划.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/blog/数数/2. 动态规划.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/blog/数数/3. 树形DP.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/blog/数数/3. 树形DP.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/blog/数论与图论/1. 图的储存.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/blog/数论与图论/1. 图的储存.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/blog/数论与图论/2. 最短路.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/blog/数论与图论/2. 最短路.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/blog/数论与图论/3. 最近公共祖先.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/blog/数论与图论/3. 最近公共祖先.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/blog/数论与图论/4. 最小生成树.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/blog/数论与图论/4. 最小生成树.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/blog/数论与图论/5. 强连通分量.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/blog/数论与图论/5. 强连通分量.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/blog/数论与图论/6. 割点和割边.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/blog/数论与图论/6. 割点和割边.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/blog/杂项/1. 技巧.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/blog/杂项/1. 技巧.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/blog/[...id].astro" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/blog/[...id].astro" afterDir="false" />
+    <list default="true" id="99b8d3b3-f2ef-4033-b6ff-6d76a602b93e" name="更改" comment="feat: 添加 slug 字段并优化文档格式">
+      <change afterPath="$PROJECT_DIR$/vercel.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -386,7 +364,15 @@
       <option name="project" value="LOCAL" />
       <updated>1774366202180</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="feat: 添加 slug 字段并优化文档格式">
+      <option name="closed" value="true" />
+      <created>1774705990607</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1774705990607</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -440,6 +426,7 @@
     <MESSAGE value="fix: add @unocss/astro dependency for Vercel build" />
     <MESSAGE value="docs:优化和更新文档内容&#10;&#10;- 将文档标题和描述翻译为中文&#10;- 更新文档中的代码示例和说明&#10;- 调整部分组件和配置的路径及名称&#10;- 更新评论系统相关配置和使用说明&#10;- 魔改系统，删除不需要的冗余元素" />
     <MESSAGE value="删除云剪切板功能及相关组件&#10;&#10;- 删除 `src/pages/clipboard/index.astro` 页面&#10;- 删除 `src/components/clipboard/input.astro` 和 `src/components/clipboard/textarea.astro` 组件&#10;- 从 `src/site.config.ts` 中移除云剪切板链接" />
-    <option name="LAST_COMMIT_MESSAGE" value="删除云剪切板功能及相关组件&#10;&#10;- 删除 `src/pages/clipboard/index.astro` 页面&#10;- 删除 `src/components/clipboard/input.astro` 和 `src/components/clipboard/textarea.astro` 组件&#10;- 从 `src/site.config.ts` 中移除云剪切板链接" />
+    <MESSAGE value="feat: 添加 slug 字段并优化文档格式" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: 添加 slug 字段并优化文档格式" />
   </component>
 </project>
