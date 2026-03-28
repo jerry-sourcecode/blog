@@ -26,8 +26,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="99b8d3b3-f2ef-4033-b6ff-6d76a602b93e" name="更改" comment="feat: 添加 slug 字段并优化文档格式">
-      <change afterPath="$PROJECT_DIR$/vercel.json" afterDir="false" />
+    <list default="true" id="99b8d3b3-f2ef-4033-b6ff-6d76a602b93e" name="更改" comment="fix: 再次尝试解决vercel无法渲染mermaid的问题">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/astro.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/astro.config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bun.lock" beforeDir="false" afterPath="$PROJECT_DIR$/bun.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/pure/scripts/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/pure/scripts/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layouts/BaseLayout.astro" beforeDir="false" afterPath="$PROJECT_DIR$/src/layouts/BaseLayout.astro" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -372,7 +378,23 @@
       <option name="project" value="LOCAL" />
       <updated>1774705990607</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="fix: 解决vercel无法渲染mermaid的问题">
+      <option name="closed" value="true" />
+      <created>1774706696799</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1774706696799</updated>
+    </task>
+    <task id="LOCAL-00026" summary="fix: 再次尝试解决vercel无法渲染mermaid的问题">
+      <option name="closed" value="true" />
+      <created>1774706910188</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1774706910188</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -402,8 +424,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="feat: 增加编辑器和预览器，扩充功能&#10;&#10;- 添加 `v-md-editor` 及其相关依赖。用于编辑、修改md文件，增加代码高亮、代码复制、公式插件&#10;- 更新 `data.ts` 文件，添加 `isPreview` 和 `text` 状态&#10;- 更新 `vite.config.ts` 配置" />
-    <MESSAGE value="feat: 增加编辑器和预览器，扩充功能&#10;&#10;- 添加 `v-md-editor` 及其相关依赖。用于编辑、修改md文件，增加代码高亮、代码复制、公式插件&#10;- 更新 `data.ts` 文件，添加 `isPreview` 和 `text` 状态&#10;- 更新 `vite.config.ts` 配置&#10;- 增加 `prettier`" />
     <MESSAGE value="feat: 增加文件系统和文档管理功能&#10;&#10;- 在 `data.ts` 中添加 `Document` 类型的 `text` 状态和 `currentPartition` 状态&#10;- 在 `model.ts` 中为 `Folder` 和 `File` 类添加 `filename` 方法&#10;- 更新 `App.vue` 以支持多标签页和文档管理&#10;- 更新 `Menu.vue` 以支持分区显示&#10;- 更新 `Editor.vue` 以支持编辑和预览模式切换" />
     <MESSAGE value="feat: 优化标签页和分区显示逻辑&#10;&#10;- 在 `App.vue` 中添加 `NTab` 组件并更新标签页切换逻辑&#10;- 更新 `Menu.vue` 以使用计算属性代替响应式引用&#10;- 将编辑器和预览器的多标签页功能移至 `Editor.vue`" />
     <MESSAGE value="refactor: 更新依赖并移除未使用的模块&#10;&#10;- 移除 `@kangc/v-md-editor` 及其相关依赖&#10;- 添加 `md-editor-v3` 作为新的 Markdown 编辑器&#10;- 移除 `data.ts` 中未使用的 `isPreview` 状态&#10;- 更新 `vite.config.ts` 和 `package.json` 的格式和依赖项" />
@@ -427,6 +447,8 @@
     <MESSAGE value="docs:优化和更新文档内容&#10;&#10;- 将文档标题和描述翻译为中文&#10;- 更新文档中的代码示例和说明&#10;- 调整部分组件和配置的路径及名称&#10;- 更新评论系统相关配置和使用说明&#10;- 魔改系统，删除不需要的冗余元素" />
     <MESSAGE value="删除云剪切板功能及相关组件&#10;&#10;- 删除 `src/pages/clipboard/index.astro` 页面&#10;- 删除 `src/components/clipboard/input.astro` 和 `src/components/clipboard/textarea.astro` 组件&#10;- 从 `src/site.config.ts` 中移除云剪切板链接" />
     <MESSAGE value="feat: 添加 slug 字段并优化文档格式" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: 添加 slug 字段并优化文档格式" />
+    <MESSAGE value="fix: 解决vercel无法渲染mermaid的问题" />
+    <MESSAGE value="fix: 再次尝试解决vercel无法渲染mermaid的问题" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: 再次尝试解决vercel无法渲染mermaid的问题" />
   </component>
 </project>

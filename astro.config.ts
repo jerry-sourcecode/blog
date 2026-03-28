@@ -1,9 +1,9 @@
 import { rehypeHeadingIds } from '@astrojs/markdown-remark'
 import vercel from '@astrojs/vercel'
+import mermaid from 'astro-mermaid'
 import AstroPureIntegration from 'astro-pure'
 import { defineConfig, fontProviders } from 'astro/config'
 import rehypeKatex from 'rehype-katex'
-import rehypeMermaid from 'rehype-mermaid'
 import remarkMath from 'remark-math'
 
 // Local integrations
@@ -64,7 +64,6 @@ export default defineConfig({
     remarkPlugins: [remarkMath],
     rehypePlugins: [
       [rehypeKatex, {}],
-      [rehypeMermaid, {}],
       rehypeHeadingIds,
       [
         rehypeAutolinkHeadings,
@@ -111,6 +110,10 @@ export default defineConfig({
     // astro-pure will automatically add sitemap, mdx & unocss
     // sitemap(),
     // mdx(),
+    mermaid({
+      theme: 'default', // 设置默认主题
+      autoTheme: true // 自动切换主题（根据 data-theme 属性）
+    }),
     AstroPureIntegration(config)
   ],
 
