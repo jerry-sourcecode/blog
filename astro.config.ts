@@ -3,6 +3,7 @@ import vercel from '@astrojs/vercel'
 import mermaid from 'astro-mermaid'
 import AstroPureIntegration from 'astro-pure'
 import { defineConfig, fontProviders } from 'astro/config'
+import rehypeCallouts from 'rehype-callouts'
 import rehypeKatex from 'rehype-katex'
 import remarkMath from 'remark-math'
 
@@ -64,6 +65,7 @@ export default defineConfig({
     remarkPlugins: [remarkMath],
     rehypePlugins: [
       [rehypeKatex, {}],
+      [rehypeCallouts, {}],
       rehypeHeadingIds,
       [
         rehypeAutolinkHeadings,

@@ -13,6 +13,8 @@ interface Props {
 const { headings, class: className, ...props } = Astro.props
 
 const toc = generateToc(headings)
+
+console.log(toc)
 ---
 
 <toc-heading class={className} {...props}>

@@ -39,3 +39,10 @@ ignore.*
 bunfig.toml
 /src/content/blog/test.*
 /test/
+
+
+.ai/
+.github/
+.idea/
+.vscode/
+src/content/blog/.obsidian/
