@@ -8,19 +8,22 @@ interface Props {
   headings: MarkdownHeading[]
   class?: string
   id?: string
+  ignoreHeading: string[]
 }
 
-const { headings, class: className, ...props } = Astro.props
-
+const { headings, class: className, ignoreHeading, ...props } = Astro.props
 const toc = generateToc(headings)
-
-console.log(toc)
+const ignoreHeadingSet = new Set(ignoreHeading)
 ---
 
 <toc-heading class={className} {...props}>
   <h2 class='font-medium'>TABLE OF CONTENTS</h2>
   <ul class='mt-4'>
-    {toc.map((heading) => <TOCHeading heading={heading} />)}
+    {
+      toc
+        .filter((v) => !ignoreHeadingSet.has(v.slug))
+        .map((heading) => <TOCHeading heading={heading} />)
+    }
   </ul>
 </toc-heading>
 
