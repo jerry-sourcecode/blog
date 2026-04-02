@@ -155,8 +155,8 @@ export const integ: IntegrationUserConfig = {
     // Hitokoto（一言）
     // https://developer.hitokoto.cn/sentence/#%E8%AF%B7%E6%B1%82%E5%9C%B0%E5%9D%80
     // Hitokoto API文档：https://developer.hitokoto.cn/sentence/#%E8%AF%B7%E6%B1%82%E5%9C%B0%E5%9D%80
-    // server: 'https://v1.hitokoto.cn/?c=i',
-    // target: `(data) => (data.hitokoto || 'Error')`
+    server: 'https://v1.hitokoto.cn/',
+    target: `(data) => (data.hitokoto || 'Error')`
     // - Quotable
     // Quotable
     // https://github.com/lukePeavey/quotable
@@ -165,8 +165,8 @@ export const integ: IntegrationUserConfig = {
     // target: `(data) => data[0].content || 'Error'`
     // - DummyJSON
     // DummyJSON
-    server: 'https://dummyjson.com/quotes/random',
-    target: `(data) => (data.quote.length > 80 ? \`\${data.quote.slice(0, 80)}...\` : data.quote || 'Error')`
+    // server: 'https://dummyjson.com/quotes/random',
+    // target: `(data) => (data.quote.length > 80 ? \`\${data.quote.slice(0, 80)}...\` : data.quote || 'Error')`
   },
   // [Typography]
   // 排版
@@ -197,7 +197,7 @@ export const integ: IntegrationUserConfig = {
   // Comment system
   // 评论系统
   waline: {
-    enable: true,
+    enable: false,
     // Server service link
     // 服务器服务链接
     server: 'https://astro-theme-pure-waline.arthals.ink/',

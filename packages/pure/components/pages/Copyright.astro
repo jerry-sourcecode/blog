@@ -1,6 +1,5 @@
 ---
 import type { CollectionKey, InferEntrySchema } from 'astro:content'
-
 import config from 'virtual:config'
 
 import { cn, getFormattedDate } from '../../utils'
@@ -93,19 +92,19 @@ const shares = {
       >
         <Icon class='size-5' name='qrcode' />
       </button>
-      {
-        config.content.share.map((share) => (
-          <a
-            href={shares[share].link}
-            target='_blank'
-            id={`share-${share}`}
-            aria-label={`Share to ${share}`}
-            class='group rounded-full bg-muted p-1 text-muted-foreground transition-colors hover:text-primary sm:p-1.5'
-          >
-            <Icon class='size-5' name={share} />
-          </a>
-        ))
-      }
+      <!--{-->
+      <!--  config.content.share.map((share) => (-->
+      <!--    <a-->
+      <!--      href={shares[share].link}-->
+      <!--      target='_blank'-->
+      <!--      id={`share-${share}`}-->
+      <!--      aria-label={`Share to ${share}`}-->
+      <!--      class='group rounded-full bg-muted p-1 text-muted-foreground transition-colors hover:text-primary sm:p-1.5'-->
+      <!--    >-->
+      <!--      <Icon class='size-5' name={share} />-->
+      <!--    </a>-->
+      <!--  ))-->
+      <!--}-->
     </div>
     <QRCode
       class='absolute z-10 -mt-2 box-content max-h-0 max-w-44 overflow-hidden rounded-xl border bg-muted p-4 opacity-0 transition-all duration-300 ease-in-out'

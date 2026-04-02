@@ -17,15 +17,13 @@ interface Props {
   posts: CollectionEntry<'blog'>[]
   headings: MarkdownHeading[]
   remarkPluginFrontmatter: Record<string, unknown>
-  ignoreHeading: string[]
 }
 
 const {
   post: { id, data },
   posts,
   headings,
-  remarkPluginFrontmatter,
-  ignoreHeading
+  remarkPluginFrontmatter
 } = Astro.props
 
 const {
@@ -52,7 +50,7 @@ const primaryColor = data.heroImage?.color ?? 'hsl(var(--primary) / var(--un-tex
   highlightColor={primaryColor}
   back='/blog'
 >
-  {!!headings.length && <TOC {headings} {ignoreHeading} slot='sidebar' />}
+  {!!headings.length && <TOC {headings} slot='sidebar' />}
 
   <Hero {data} {remarkPluginFrontmatter} slot='header'>
     <Fragment slot='description'>

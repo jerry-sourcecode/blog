@@ -1,5 +1,6 @@
 ---
 import { render, type CollectionEntry } from 'astro:content'
+import * as cheerio from 'cheerio'
 
 import { getBlogCollection, sortMDByDate } from 'astro-pure/server'
 import PostLayout from '@/layouts/BlogPost.astro'
@@ -13,16 +14,28 @@ export async function getStaticPaths() {
     props: { post, posts }
   }))
 }
-
-function extractIdsFromBlockquoteHeadings(str: string): string[] {
-  const regex = /<blockquote>\s*<(h[1-6])\s+[^>]*\bid\s*=\s*(["'])([^"']*)\2[^>]*>/gi
+/**
+ * 从 HTML 字符串中提取位于 <blockquote> 或 <details class="callout"> 内部标题标签（h1~h6）的 id。
+ * 使用 cheerio 进行可靠解析，支持嵌套结构和复杂 HTML。
+ * @param html - 待搜索的 HTML 字符串
+ * @returns 提取到的 id 值数组
+ */
+function extractIdsFromContainers(html: string = ''): string[] {
+  const $ = cheerio.load(html)
   const ids: string[] = []
-  let match: RegExpExecArray | null
 
-  while ((match = regex.exec(str)) !== null) {
-    // 捕获组 3 是 id 值
-    ids.push(match[3])
-  }
+  // 选择所有 blockquote 元素，以及 class 包含 "callout" 的 details 元素
+  $('blockquote, details.callout').each((_, container) => {
+    // 在容器内部查找所有标题标签
+    $(container)
+      .find('h1, h2, h3, h4, h5, h6')
+      .each((_, heading) => {
+        const id = $(heading).attr('id')
+        if (id !== undefined) {
+          ids.push(id)
+        }
+      })
+  })
 
   return ids
 }
@@ -33,11 +46,13 @@ type Props = {
 }
 
 const { post, posts } = Astro.props
-const { Content, headings, remarkPluginFrontmatter } = await render(post)
+let { Content, headings, remarkPluginFrontmatter } = await render(post)
 
-const ignoreHeading = extractIdsFromBlockquoteHeadings(post.rendered!.html!)
+const ignoreHeading = new Set(extractIdsFromContainers(post.rendered?.html))
+
+headings = headings.filter((heading) => !ignoreHeading.has(heading.slug))
 ---
 
-<PostLayout {post} {posts} {headings} {remarkPluginFrontmatter} {ignoreHeading}>
+<PostLayout {post} {posts} {headings} {remarkPluginFrontmatter}>
   <Content />
 </PostLayout>
