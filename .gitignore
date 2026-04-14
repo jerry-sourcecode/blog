@@ -45,4 +45,4 @@ bunfig.toml
 .github/
 .idea/
 .vscode/
-src/content/blog/.obsidian/
+.obsidian/
